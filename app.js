@@ -8,8 +8,6 @@ const bodyParser = require("body-parser");
 const printRouter = require("./routes/printRouter");
 const mypageRouter = require("./routes/mypageRouter");
 
-app.use(express.static("public"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
@@ -53,9 +51,7 @@ app.use("/mypage", mypageRouter);
 
 //topに遷移
 app.get("/", (req, res) => {
-  connection.query("SELECT * FROM articles", (error, results) => {
-    res.render("top.ejs", { articles: results });
-  });
+  res.render("top.ejs");
 });
 
 //国語に遷移

@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+  font-family: "UD デジタル 教科書体 N-R";
+  font-size: 16px;
+}
+
+p {
+  font-size: 18px;
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style-type: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+/*ヘッダー*/
+header {
+  height: 100px;
+  width: 100%;
+  top: 0px;
+  border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+/*ヘッダーロゴ*/
+.header-logo {
+  margin: 5px;
+  padding: 0px;
+  padding-left: 5px;
+  font-weight: bold;
+  font-family: "OCRB";
+  font-size: 72px;
+  height: 90px;
+  color: rgb(49, 49, 49);
+  text-shadow: 4px 4px 6px rgb(197, 197, 197);
+  display: inline;
+  float: left;
+}
+
+.header-right {
+  height: 100px;
+  width: 65%;
+  float: right;
+}
+
+.header-right > p {
+  line-height: 65px;
+  margin-top: 40px;
+  padding: 0 50px;
+  display: block;
+  float: left;
+}
+.header-right-container {
+  width: 10%;
+  height: 90px;
+  bottom: 0;
+  margin: 5px;
+  padding: 0 25px;
+  font-size: 16px;
+  display: block;
+  float: right;
+  position: relative;
+  border: 1px solid rgb(77, 77, 77);
+}
+.header-right-container p {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  margin: 0;
+  padding-top: auto;
+  padding-bottom: 0;
+  padding-left: auto;
+  padding-right: 0;
+}
+
+/*問題エリア*/
+.questions {
+  height: 500px;
+  padding-bottom: 0px;
+  background-color: none;
+  text-align: left;
+}
+.questions > h1 {
+  padding-top: 60px;
+  padding-bottom: 10px;
+}
+.questions p {
+  font-weight: normal;
+  color: #afadb1;
+}
+
+/*フッター*/
+footer p {
+  font-size: 18px;
+  margin: 2px;
+  padding: 2px;
+  padding-top: 20px;
+}
+footer {
+  width: 100%;
+  text-align: right;
+}
+.svgImg {
+  width: 100%;
+  display: flex;
+  height: 1500px;
+  margin-top: 5px;
+  background-color: #dadada;
+}
+.svgImg svg {
+  width: auto;
+  height: 750px;
+  transform: scale(1);
+}
+
+img {
+  padding-top: 5px;
+  height: 300px;
+  width: 400px;
+  border: 1px solid rgb(77, 77, 77);
+}

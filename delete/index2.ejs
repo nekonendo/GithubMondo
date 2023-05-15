@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MathJax SVG Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <link rel="stylesheet" href="/stylesheets/stylesheet3.css" />
+  </head>
+  <body>
+    <!--ヘッダー呼び出し-->
+
+    <%- include('header'); %>
+
+    <!--本文-->
+    <div id="formula"><%- svg %></div>
+    <script>
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, "formula"]);
+    </script>
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

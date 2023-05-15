@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/stylesheet2.css" />
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+
+    <%- include('header'); %>
+
+    <!--本文-->
+
+    <div class="container">
+      <div class="container-header">
+        <h1>問答を編集する</h1>
+        <a href="/mypage" class="cancel-button">キャンセル</a>
+      </div>
+      <div class="item-form-wrapper">
+        <p class="form-label">問答</p>
+        <form action="/update" method="post">
+          <input type="hidden" name="tableName" Value="<%= tableName %>" />
+          <input type="hidden" name="category" value="<%= category %>" />
+          <input type="hidden" name="id" value="<%= lists[0].id %>" />
+          <h2><%= tableName %></h2>
+          <h2><%= lists.categoryLabel %></h2>
+          <h2><%= lists.tangenLabel %></h2>
+
+          <p>問題</p>
+          <input name="listQuestion" type="text" value="<%= lists[0].question %>" />
+          <p>解答</p>
+          <input name="listAnswer" type="text" value="<%= lists[0].answer %>" />
+          <input type="submit" value="更新する" />
+        </form>
+      </div>
+    </div>
+
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

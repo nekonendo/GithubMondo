@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css" />
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+    <%- include('header'); %>
+    <!--本文-->
+    <div class="choice">
+      <form action="/print/other" method="post">
+        <div class="ctl">
+          <div class="quecount">
+            <h2>問題数</h2>
+            <disv class="count">
+              <input type="radio" name="quecount" value="5" />5問
+              <input type="radio" name="quecount" value="10" />10問
+              <input type="radio" name="quecount" value="15" checked />15問
+            </disv>
+          </div>
+          <div class="tangen">
+            <h2>出題範囲を選択してください</h2>
+            <div class="rekishi">
+              <h3>歴史</h3>
+              <input type="checkbox" name="tangen" value="jomon" />縄文時代　　
+              <input type="checkbox" name="tangen" value="yayoi" />弥生時代　　
+              <input type="checkbox" name="tangen" value="kohun" />古墳時代　　
+              <input type="checkbox" name="tangen" value="asuka" />飛鳥時代　　
+              <input type="checkbox" name="tangen" value="nara" />奈良時代　　<br />
+              <input type="checkbox" name="tangen" value="heian" />平安時代　　
+              <input type="checkbox" name="tangen" value="kamakura" />鎌倉時代　　
+              <input type="checkbox" name="tangen" value="nanboku" />南北朝時代　
+              <input type="checkbox" name="tangen" value="muromati" />室町時代　　
+              <input type="checkbox" name="tangen" value="aduti" />安土桃山時代<br />
+              <input type="checkbox" name="tangen" value="edo" />江戸時代　　
+              <input type="checkbox" name="tangen" value="meiji" />明治時代　　
+              <input type="checkbox" name="tangen" value="taisyo" />大正時代　　
+              <input type="checkbox" name="tangen" value="syowa" />昭和時代　　
+              <input type="checkbox" name="tangen" value="heisei" />平成時代<br />
+            </div>
+            <div class="chiri">
+              <h3>地理</h3>
+              <input type="checkbox" name="tangen" value="geoworld" />世界の姿　　
+              <input type="checkbox" name="tangen" value="geoasia" />アジア州　　
+              <input type="checkbox" name="tangen" value="geoeuropa" />ヨーロッパ州
+              <input type="checkbox" name="tangen" value="geoafrica" />アフリカ州　<br />
+              <input type="checkbox" name="tangen" value="geonorthamerica" />北アメリカ州
+              <input type="checkbox" name="tangen" value="geosouthamerica" />南アメリカ州
+              <input type="checkbox" name="tangen" value="geooceania" />オセアニア州<br />
+              <input type="checkbox" name="tangen" value="geojapan" />日本の姿　　
+              <input type="checkbox" name="tangen" value="geokyusyu" />九州地方　　
+              <input type="checkbox" name="tangen" value="geochugokushikoku" />中国四国地方
+              <input type="checkbox" name="tangen" value="geokinki" />近畿地方　　<br />
+              <input type="checkbox" name="tangen" value="geochubu" />中部地方　　
+              <input type="checkbox" name="tangen" value="geokanto" />関東地方　　
+              <input type="checkbox" name="tangen" value="geotohoku" />東北地方　　
+              <input type="checkbox" name="tangen" value="geohokkaido" />北海道地方　<br />
+            </div>
+            <div class="koumin">
+              <h3>公民</h3>
+              <input type="checkbox" name="tangen" value="citijiji" />時事問題　　
+              <input type="checkbox" name="tangen" value="citigendai" />現代社会　　
+              <input type="checkbox" name="tangen" value="citikenpo" />憲法　　　　<br />
+              <input type="checkbox" name="tangen" value="citiseiji" />政治　　　　
+              <input type="checkbox" name="tangen" value="citikeizai" />経済　　　　
+              <input type="checkbox" name="tangen" value="" />国際　　　　<br />
+            </div>
+          </div>
+        </div>
+        <div class="print">
+          <input type="hidden" name="printrange" value="printshufful" checked />
+          <input type="hidden" name="tableName" value="sostudy" />
+          <input type="submit" class="btn" value="印刷" />
+        </div>
+      </form>
+    </div>
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

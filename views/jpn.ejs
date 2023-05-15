@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css" />
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+
+    <%- include('header'); %>
+
+    <!--本文-->
+    <div class="choice">
+      <!--<form action="/pdf/jpn" method="post">-->
+      <form action="/print/other" method="post">
+        <div class="ctl">
+          <div class="quecount">
+            <h2>問題数</h2>
+            <div class="count">
+              <input type="radio" name="quecount" value="5" />5問
+              <input type="radio" name="quecount" value="10" />10問
+              <input type="radio" name="quecount" value="15" checked />15問
+            </div>
+          </div>
+          <div class="tangen">
+            <h2>出題範囲を選択してください</h2>
+            <div class="write">
+              <h3>書き</h3>
+              <input type="checkbox" name="tangen" value="wkanji1" />１年生（書き）
+              <input type="checkbox" name="tangen" value="wkanji2" />２年生（書き）
+              <input type="checkbox" name="tangen" value="wkanji3" />３年生（書き）<br />
+              <input type="checkbox" name="tangen" value="wkanji4" />４年生（書き）
+              <input type="checkbox" name="tangen" value="wkanji5" />５年生（書き）
+              <input type="checkbox" name="tangen" value="wkanji6" />６年生（書き）
+            </div>
+            <div class="read">
+              <h3>読み</h3>
+              <input type="checkbox" name="tangen" value="rkanji1" />１年生（読み）
+              <input type="checkbox" name="tangen" value="rkanji2" />２年生（読み）
+              <input type="checkbox" name="tangen" value="rkanji3" />３年生（読み）<br />
+              <input type="checkbox" name="tangen" value="rkanji4" />４年生（読み）
+              <input type="checkbox" name="tangen" value="rkanji5" />５年生（読み）
+              <input type="checkbox" name="tangen" value="rkanji6" />６年生（読み）
+            </div>
+          </div>
+        </div>
+        <div class="print">
+          <input type="hidden" name="printrange" value="printshufful" checked />
+          <input type="hidden" name="tableName" value="japanese" />
+          <input type="submit" class="btn" value="印刷" />
+        </div>
+      </form>
+    </div>
+
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

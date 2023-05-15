@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do プリントサービス</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/stylesheet3.css" />
+  </head>
+  <body>
+
+    <% for (let j= 0; j<pageCount;j++){ %>
+      <div class="page">
+        <%- include('pdfheader'); %>
+        <div class="area">
+          <div class="odai">◎次の問いに答えなさい</div>
+            <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
+              <% if ( i=== queryResults.length){ %>
+                <% break;}else{ %>
+                  <li>
+                    <div class="question">(<%= no %>) <%= queryResults[i].question; %></div>
+                    <div class="ansbox"></div>
+                  </li>
+              <% }}; %>
+        </div>
+        <%- include('pdffooter'); %>
+      </div>
+        <!--ページ区切り-->
+      <div class="page-break"></div>
+      <div class="page">
+        <%- include('pdfheader'); %>
+        <div class="area">
+          <% if(tableName==="english") {%>
+            <div class="odai">◎次の問いに答えなさい</div>
+            <%}else{%>
+            <div class="odai">●解答</div><%}%>
+            <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
+              <% if ( i=== queryResults.length){ %>
+                <% break;}else{ %>
+                  <li>
+                    <div class="question">(<%= no %>) <%= queryResults[i].answer; %></div>
+                    <% if ( tableName === "english"){%>
+                    <div class="ansbox"></div>
+                    <% } %>
+                  </li>
+            <% };} %>
+        </div>
+        <%- include('pdffooter'); %>
+      </div>
+      <div class="page-break"></div>
+    <% } %>
+  </body>
+</html>

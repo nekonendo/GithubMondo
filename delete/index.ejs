@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MathJax Rendering</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>MathJax Rendering</h1>
+    <p>The formula we are rendering is:</p>
+    <p>E = MC<sup>2</sup></p>
+    <p>$$ \begin{align*} x &= \frac{-2 ± 2\sqrt{13}}{3} \end{align*} $$</p>
+    <p>The MathJax SVG output is:</p>
+    <%- svg %>
+  </body>
+</html>

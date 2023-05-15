@@ -1,0 +1,23 @@
+
+<header>
+    <div class="container">
+      <div class="header-left">
+        <a href="/" class="header-logo">ＭＯＮ-ＤＯ</a>
+        <p>ようこそ、<%= locals.username  %> さん</p>
+      </div>
+      <span class="fa menu-icon"></span>
+      <div class="header-right">
+        <% if(locals.isLoggedIn) { %>
+        <a href="/mypage">マイページ</a>
+        <% }else{ %>
+        <a href="/signup">ユーザー登録</a>
+        <% } %>
+        <% if(locals.isLoggedIn) { %>
+          <a href="/logout">ログアウト</a>
+        <% }else{ %>
+          <a href="/login" class="login">ログイン</a>
+        <% } %>
+      </div>
+    </div>
+</header>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do プリントサービス</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/stylesheet3.css" />
+  </head>
+  <body>
+    <div class="page">
+      <%- include('pdfheader'); %>
+      <div class="area">
+        <div class="odai">◎次の問いに答えなさい</div>
+        <div class="svgImg" id="formula"><%- imgTag1 %></div>
+      </div>
+      <%- include('pdffooter'); %>
+    </div>
+    <!--ページ区切り-->
+    <div class="page-break"></div>
+    <div class="page">
+      <%- include('pdfheader'); %>
+      <div class="area2">
+        <div class="odai">●解答</div>
+        <div class="svgImg" id="formula"><%- imgTag2 %></div>
+      </div>
+      <div class="advarea"></div>
+      <%- include('pdffooter'); %>
+    </div>
+  </body>
+</html>

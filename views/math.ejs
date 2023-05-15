@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css" />
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+    <%- include('header'); %>
+    <!--本文-->
+    <div class="choice">
+      <form action="/print/math" method="post">
+        <div class="ctl">
+          <div class="quecount">
+            <h2>問題数</h2>
+            <disv class="count">
+              <input type="radio" name="quecount" value="5" />5問
+              <input type="radio" name="quecount" value="10" />10問
+              <input type="radio" name="quecount" value="15" checked />15問
+            </disv>
+          </div>
+          <div class="tangen">
+            <h2>出題範囲を選択してください</h2>
+            <div class="math-tangen">
+              <span>整数のたし算</span>
+              <input type="checkbox" name="tangen" value="m1000" />くりあげなし
+              <input type="checkbox" name="tangen" value="m1100" />くりあげあり
+              <input type="checkbox" name="tangen" value="m1200" />２けた
+              <input type="checkbox" name="tangen" value="m1300" />むずかしめ<br />
+              <span>整数のひき算</span>
+              <input type="checkbox" name="tangen" value="m1400" />くりさげなし
+              <input type="checkbox" name="tangen" value="m1500" />２けた
+              <input type="checkbox" name="tangen" value="m1600" />３けた
+              <input type="checkbox" name="tangen" value="m1700" />むずかしめ<br />
+              <span>整数のかけ算</span>
+              <input type="checkbox" name="tangen" value="m1800" />九九
+              <input type="checkbox" name="tangen" value="m1900" />２けた
+              <input type="checkbox" name="tangen" value="m2000" />３けた
+              <input type="checkbox" name="tangen" value="m2100" />むずかしめ<br />
+              <span>整数のわり算</span>
+              <input type="checkbox" name="tangen" value="m2200" />〇〇÷１けた
+              <input type="checkbox" name="tangen" value="m2300" />〇〇÷２けた
+              <input type="checkbox" name="tangen" value="m2400" />あまりあり
+              <input type="checkbox" name="tangen" value="m2500" />むずかしめ<br />
+              <span>難しい計算　</span>
+              <input type="checkbox" name="tangen" value="m2600" />四則計算
+              <input type="checkbox" name="tangen" value="m2700" />かっこのある計算
+              <input type="checkbox" name="tangen" value="m2800" />累乗<br />
+              <span>小数の計算　</span>
+              <input type="checkbox" name="tangen" value="m3000" />たし算
+              <input type="checkbox" name="tangen" value="m3100" />ひき算
+              <input type="checkbox" name="tangen" value="m3200" />かけ算
+              <input type="checkbox" name="tangen" value="m3300" />わり算<br />
+              <span>分数の計算　</span>
+              <input type="checkbox" name="tangen" value="m3400" />加減算（通分なし）
+              <input type="checkbox" name="tangen" value="m3500" />加減算（通分あり）
+              <input type="checkbox" name="tangen" value="m3600" />かけ算<br />
+              <span>　　　　　　</span>
+              <input type="checkbox" name="tangen" value="m3700" />わり算
+              <input type="checkbox" name="tangen" value="m3800" />約分
+              <input type="checkbox" name="tangen" value="m3900" />帯分数<br />
+              <span>割合　　　　</span>
+              <input type="checkbox" name="tangen" value="m4000" />百分率
+              <input type="checkbox" name="tangen" value="m4100" />歩合
+              <input type="checkbox" name="tangen" value="m4200" />比<br />
+
+              <span>正負の数　　</span>
+              <input type="checkbox" name="tangen" value="m5000" />加減
+              <input type="checkbox" name="tangen" value="m5200" />乗除
+              <input type="checkbox" name="tangen" value="m5400" />四則計算<br />
+              <span>文字式の計算</span>
+              <input type="checkbox" name="tangen" value="m5600" />計算
+              <input type="checkbox" name="tangen" value="m5700" />分配法則
+              <input type="checkbox" name="tangen" value="m5800" />分数の計算<br />
+              <span>方程式　　　</span>
+              <input type="checkbox" name="tangen" value="m5900" />加減のみ
+              <input type="checkbox" name="tangen" value="m6000" />乗除のみ
+              <input type="checkbox" name="tangen" value="m6100" />加減乗除<br />
+              <span>連立方程式　</span>
+              <input type="checkbox" name="tangen" value="m6200" />代入法
+              <input type="checkbox" name="tangen" value="m6300" />加減法<br />
+              <span>展開公式　　</span>
+              <input type="checkbox" name="tangen" value="m6400" />公式１
+              <input type="checkbox" name="tangen" value="m6500" />公式２，３
+              <input type="checkbox" name="tangen" value="m6600" />公式４<br />
+
+              <span>因数分解　　</span>
+              <input type="checkbox" name="tangen" value="m6700" />分配法則
+              <input type="checkbox" name="tangen" value="m6800" />公式１
+              <input type="checkbox" name="tangen" value="m6900" />公式２，３
+              <input type="checkbox" name="tangen" value="m7000" />公式４<br />
+              <span>平方根　　　</span>
+              <input type="checkbox" name="tangen" value="m7100" />簡単化
+              <input type="checkbox" name="tangen" value="m7200" />加減
+              <input type="checkbox" name="tangen" value="m7300" />乗除<br />
+              <span>二次方程式　</span>
+              <input type="checkbox" name="tangen" value="m7400" />因数分解
+              <input type="checkbox" name="tangen" value="m7500" />解の公式<br />
+            </div>
+          </div>
+        </div>
+        <div class="print">
+          <input type="hidden" name="tableName" value="math" />
+          <input type="submit" class="btn" value="印刷" />
+        </div>
+      </form>
+    </div>
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

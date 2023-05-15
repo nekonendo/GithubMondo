@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css" />
+    <script src="/javascripts/script2.js"></script>
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+    <%- include('header'); %>
+    <!--本文-->
+    <div class="choice">
+      <form action="/print/other" method="post">
+        <div class="ctl">
+          <div class="quecount">
+            <h2>問題数</h2>
+            <div class="count">
+              <input type="radio" name="quecount" value="5" />5問
+              <input type="radio" name="quecount" value="10" />10問
+              <input type="radio" name="quecount" value="15" checked />15問
+            </div>
+          </div>
+          <div class="tangen">
+            <h2>出題範囲を選択してください</h2>
+            <div class="word">
+              <h3>単語テスト</h3>
+              <p>区分</p>
+              <select name="category" id="category">
+                <option value="">選択してください</option>
+                <option value="newhorizon1">NewHorizon１年</option>
+                <option value="newhorizon2">NewHorizon２年</option>
+                <option value="newhorizon3">NewHorizon３年</option>
+                <option value="newcrown1">NewCrown１年</option>
+                <option value="newcrown2">NewCrown２年</option>
+                <option value="newcrown3">NewCrown３年</option>
+              </select>
+              <p>単元</p>
+              <select name="tangen" id="tangen"></select>
+            </div>
+          </div>
+          <div class="printcount">
+            <h2>印刷範囲</h2>
+            <input type="radio" name="printrange" value="printall" />単元まるごと
+            <input type="radio" name="printrange" value="printshufful" checked />シャッフル
+          </div>
+        </div>
+        <div class="print">
+          <input type="hidden" name="tableName" value="english" />
+          <input type="submit" class="btn" value="印刷" />
+        </div>
+      </form>
+    </div>
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

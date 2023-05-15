@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css" />
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+
+    <%- include('header'); %>
+
+    <!--本文-->
+
+    <div class="sign">
+      <div class="container">
+        <div class="signpanel">
+          <h2>ユーザー登録</h2>
+          <form action="/signup" method="post">
+            <p>ユーザー名</p>
+            <input type="text" name="username" value="<%= username %>" />
+            <p>塾名</p>
+            <input type="text" name="school" value="<%= school %>" />
+            <p>メールアドレス</p>
+            <input type="text" name="email" value="<%= email %>" />
+            <p>パスワード</p>
+            <input type="password" name="password" />
+            <% if (errors.length > 0) { %>
+            <ul class="errors">
+              <% errors.forEach(error => { %>
+              <li><%= error %></li>
+              <% }); %>
+            </ul>
+            <% } %>
+            <input type="submit" class="btn" value="登録する" />
+            <a href="/">トップページにもどる</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

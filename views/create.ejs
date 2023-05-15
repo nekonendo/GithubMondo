@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon-Do</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/stylesheet2.css" />
+    <script src="/javascripts/script3.js" ></script>
+
+  </head>
+
+  <!--ボディ-->
+  <body>
+    <!--ヘッダー呼び出し-->
+
+    <%- include('header'); %>
+
+    <!--本文-->
+
+    <div class="container">
+      <div class="container-header">
+        <div class="container-header">
+          <h1>問答の新規作成</h1>
+        </div>
+        <a href="/mypage" class="cancel-button">キャンセル</a>
+      </div>
+        <p class="form-label">問答</p>
+        <form action="/mypage/create" method="post">
+          <li>
+            <p>科目</p>
+            <select name="subject" id="subject" onChange="updateCategory()">
+              <option value="">選択してください</option>
+              <option value="math"<% if (myselect === 'math') { %>selected<% } %>>数学</option>
+              <option value="english"<% if (myselect === 'english') { %>selected<% } %>>英語</option>
+              <option value="japanese"<% if (myselect === 'japanese') { %>selected<% } %>>国語</option>
+              <option value="sostudy"<% if (myselect === 'sostudy') { %>selected<% } %>>社会</option>
+              <option value="science"<% if (myselect === 'science') { %>selected<% } %>>理科</option>
+              <option value="zatugaku"<% if (myselect === 'zatugaku') { %>selected<% } %>>雑学</option>
+            </select>
+            <h6><%= subjecterror %></h6>
+            <p>区分</p>
+            <select name="category" id="category" onChange="updateTangen()"></select>
+            <h6><%= categoryerror %></h6>
+            <p>単元</p>
+            <select name="tangen" id="tangen"></select>
+            <h6><%= tangenerror %></h6>
+              <p class="form-label">問題</p>
+              <input type="text" name="question" />
+              <p class="form-label">解答</p>
+              <input type="text" name="answer" />
+              <input type="submit" value="作成する" />
+          </li>
+        </form>
+    </div>
+
+    <!--フッター呼び出し-->
+    <%- include('footer'); %>
+  </body>
+</html>

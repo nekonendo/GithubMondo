@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<!--ヘッド*/-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon-Do</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/stylesheet2.css">
+  </head>
+
+<!--ボディ-->
+  <body>
+<!--ヘッダー呼び出し-->
+
+  <%- include('header'); %>
+
+<!--トップ画-->
+    <div class="top-wrapper">
+      <div class="top-container">
+        <h1>ＭＯＮ-ＤＯ</h1>
+        <h2>学習プリント無料作成</h2>
+        <p>一問一答式の学習プリントを自由に印刷できます<br>
+        誰でも、何枚でも、いつまでも無料です</p>
+        </div>
+      </div>
+    </div>
+
+<!--教科ボタン-->
+    <div class="subject-wrapper">
+
+        <div class="heading">
+          <h2>プリントを印刷</h2>
+        </div>
+        <div class="subjects1">
+          <!--国語-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/jpn"><img src="/images/img_jpn.png" ></a>
+            </div>
+            <p class="txt-contents">【小学生向け】学年ごとの漢字テストがつくれます</p>
+          </div>
+          <!--数学-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/math"><img src="/images/img_math.png"></a>
+            </div>
+            <p class="txt-contents">単元ごとの計算テストがつくれます</p>
+          </div>
+          <!--英語-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/eng"><img src="/images/img_eng.png"></a>
+            </div>
+            <p class="txt-contents">教科書に合わせた英単語テストがつくれます</p>
+          </div>
+        </div>
+
+        <div class="subjects2">
+          <!--理科-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/sce"><img src="/images/img_sec.png"></a>
+            </div>
+            <p class="txt-contents">理科の一問一答テストがつくれます</p>
+          </div>          
+          <!--社会-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/sost"><img src="/images/img_sost.png"></a>
+            </div>
+            <p class="txt-contents">社会の一問一答テストがつくれます</p>
+          </div>
+           <!--雑学-->
+          <div class="subject">
+            <div class="subject-icon">
+              <a href = "/zatu"><img src="/images/img_zatu.png"></a>
+            </div>
+            <p class="txt-contents">さまざまな雑学系の問題を印刷</p>
+          </div>
+        </div> 
+    </div>
+
+    <div class="message-wrapper">
+        <div class="heading">
+          <h2>塾の先生へ</h2>
+          <h3>一緒に問答を作ってMon-doに協力してくれませんか？</h3>
+          <h3>あなたが作った問答も一緒に印刷されるようになります。</h3>
+        </div>
+        <a href="/signup" class="btn message">さっそく問答を登録する</a>
+    </div>
+<!--フッター呼び出し-->
+<%- include('footer'); %>
+
+  </body>
+</html>

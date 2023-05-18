@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/stylesheets/stylesheet2.css" />
+    <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
   </head>
 
   <!--ボディ-->
@@ -19,31 +19,41 @@
     <%- include('header'); %>
 
     <!--本文-->
+    <div class="edit">
+      <div class="container">
+        <div class="ctl">
+          <h2>問答を編集する</h2>
 
-    <div class="container">
-      <div class="container-header">
-        <h1>問答を編集する</h1>
-        <a href="/mypage" class="cancel-button">キャンセル</a>
-      </div>
-      <div class="item-form-wrapper">
-        <p class="form-label">問答</p>
-        <form action="/update" method="post">
-          <input type="hidden" name="tableName" Value="<%= tableName %>" />
-          <input type="hidden" name="category" value="<%= category %>" />
-          <input type="hidden" name="id" value="<%= lists[0].id %>" />
-          <h2><%= tableName %></h2>
-          <h2><%= lists.categoryLabel %></h2>
-          <h2><%= lists.tangenLabel %></h2>
-
-          <p>問題</p>
-          <input name="listQuestion" type="text" value="<%= lists[0].question %>" />
-          <p>解答</p>
-          <input name="listAnswer" type="text" value="<%= lists[0].answer %>" />
-          <input type="submit" value="更新する" />
-        </form>
+          <form action="/mypage/update" method="post">
+            <input type="hidden" name="tableName" Value="<%= tableName %>" />
+            <input type="hidden" name="category" value="<%= category %>" />
+            <input type="hidden" name="tangen" value="<%= tangen %>" />
+            <input type="hidden" name="id" value="<%= lists[0].id %>" />
+            <%if (tableName==="japanese"){%>
+            <p>科目:　　国語</p>
+            <%}else if(tableName==="english"){%>
+            <p>科目:　　英語</p>
+            <%}else if(tableName==="math"){%>
+            <p>科目:　　数学</p>
+            <%}else if(tableName==="science"){%>
+            <p>科目:　　理科</p>
+            <%}else if(tableName==="sostudy"){%>
+            <p>科目:　　社会</p>
+            <%}else if(tableName==="zatugaku"){%>
+            <p>科目:　　雑学 %></p>
+            <%}%>
+            <p>区分:　　<%= lists[0].categoryLabel %></p>
+            <p>単元:　　<%= lists[0].tangenLabel %></p>
+            <p>問題</p>
+            <input name="listQuestion" type="text" value="<%= lists[0].question %>" />
+            <p>解答</p>
+            <input name="listAnswer" type="text" value="<%= lists[0].answer %>" />
+            <input type="submit" class="btn" value="更新する" />
+            <a href="javascript:history.back()">マイページへ戻る</a>
+          </form>
+        </div>
       </div>
     </div>
-
     <!--フッター呼び出し-->
     <%- include('footer'); %>
   </body>

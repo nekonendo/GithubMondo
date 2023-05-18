@@ -451,6 +451,7 @@ window.onload = function () {
   //ドロップダウンをチェンジした時にリストを呼び出してhtmlを動的に変更
   subject.addEventListener("change", function () {
     ifSubject();
+    ifCategory();
   });
   category.addEventListener("change", function () {
     ifCategory();
@@ -458,7 +459,6 @@ window.onload = function () {
 
   // 区分プルダウンの処理
   ifSubject();
-  console.log("hello");
   let selectedValue = localStorage.getItem("selectedValue");
   if (selectedValue === null || selectedValue === undefined) {
     document.getElementById("category").value = "";

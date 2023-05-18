@@ -66,12 +66,19 @@ app.get("/math", (req, res) => {
 
 //英語に遷移
 app.get("/eng", (req, res) => {
-  res.render("eng.ejs");
+  const categoryerror = [];
+  const tangenerror = [];
+  const category = [];
+  res.render("eng.ejs", {
+    categoryerror: categoryerror,
+    tangenerror: tangenerror,
+    category: category,
+  });
 });
 
 //理科に遷移
-app.get("/sce", (req, res) => {
-  res.render("sce.ejs");
+app.get("/sci", (req, res) => {
+  res.render("sci.ejs");
 });
 
 //社会に遷移
@@ -82,131 +89,6 @@ app.get("/sost", (req, res) => {
 //雑学に遷移
 app.get("/zatu", (req, res) => {
   res.render("zatu.ejs");
-});
-
-////////////////      問答の編集＆削除      ////////////////
-
-//問題の編集ページに遷移
-app.post("/edit/:id", (req, res) => {
-  const tableName = req.body.tableName;
-  const category = req.body.category;
-  connection.query(
-    `SELECT * FROM ${tableName} JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.id=?`,
-    [req.params.id],
-    (error, results) => {
-      console.log(results);
-      res.render("edit.ejs", { lists: results, tableName: tableName, category: category });
-    }
-  );
-});
-
-//問題の編集
-app.post("/update", (req, res) => {
-  const tableName = req.body.tableName;
-  const category = req.body.category;
-  const myselect = req.body.subject;
-  const addmyselect = req.body.addsubject;
-  const subjecterror = [];
-  const categoryerror = [];
-  const tangenerror = [];
-  const addsubjecterror = [];
-  const addcategoryerror = [];
-  const addtangenerror = [];
-  const errors = [];
-  connection.query(
-    `UPDATE ${tableName} SET question = ?,answer=?,date=now() WHERE id = ?`,
-    [req.body.listQuestion, req.body.listAnswer, req.body.id],
-    (error, results) => {
-      connection.query(
-        `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
-        [req.session.username],
-        (error, results) => {
-          if (error) {
-            console.error(error);
-            res.status(500).send("エラーが発生しました。");
-            return;
-          }
-          results.forEach((list) => {
-            if (list.date === null) {
-              list.date = "****";
-            } else {
-              //日付表示フォーマット
-              const date2 = list.date;
-              const y = date2.getFullYear();
-              const m = date2.getMonth() + 1;
-              const d = date2.getDate();
-              const date3 = y + "/" + m + "/" + d;
-              list.date = date3;
-            }
-          });
-          res.render("mypage.ejs", {
-            lists: results,
-            tableName: tableName,
-            category: category,
-            myselect: myselect,
-            addmyselect: addmyselect,
-            subjecterror: subjecterror,
-            categoryerror: categoryerror,
-            tangenerror: tangenerror,
-            addsubjecterror: addsubjecterror,
-            addcategoryerror: addcategoryerror,
-            addtangenerror: addtangenerror,
-          });
-        }
-      );
-    }
-  );
-});
-
-//問題の削除
-app.post("/delete/:id", (req, res) => {
-  const tableName = req.body.tableName;
-  const category = req.body.category;
-  const myselect = req.body.subject;
-  const addmyselect = req.body.addsubject;
-  const subjecterror = [];
-  const categoryerror = [];
-  const tangenerror = [];
-  const addsubjecterror = [];
-  const addcategoryerror = [];
-  const addtangenerror = [];
-  const errors = [];
-  connection.query(`DELETE FROM ${tableName}  WHERE id = ?`, [req.params.id], (error, results) => {
-    connection.query(
-      `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
-      [req.session.username],
-      (error, results) => {
-        //一覧表をリロードし新規作成した単元を表示
-        results.forEach((list) => {
-          if (list.date === null) {
-            list.date = "****";
-          } else {
-            //日付表示フォーマット
-            const date2 = list.date;
-            const y = date2.getFullYear();
-            const m = date2.getMonth() + 1;
-            const d = date2.getDate();
-            const date3 = y + "/" + m + "/" + d;
-            list.date = date3;
-          }
-        });
-        res.render("mypage.ejs", {
-          lists: results,
-          tableName: tableName,
-          category: category,
-          myselect: myselect,
-          addmyselect: addmyselect,
-          //tangen: tangen,
-          subjecterror: subjecterror,
-          categoryerror: categoryerror,
-          tangenerror: tangenerror,
-          addsubjecterror: addsubjecterror,
-          addcategoryerror: addcategoryerror,
-          addtangenerror: addtangenerror,
-        });
-      }
-    );
-  });
 });
 
 ////////////////      ユーザー登録      ////////////////
@@ -293,7 +175,7 @@ app.post(
     const email = req.body.email;
     const password = req.body.password;
 
-    //ハッシュ化用の行
+    //ハッシュ化
     bcrypt.hash(password, 10, (error, hash) => {
       connection.query(
         "INSERT INTO users (username,school,email, password) VALUES (?, ?, ?, ?)",
@@ -310,7 +192,7 @@ app.post(
 
 //////////      ログイン      //////////
 
-//loginに遷移
+//ログインページに遷移
 app.get("/login", (req, res) => {
   const email = "";
   const password = "";
@@ -327,16 +209,12 @@ app.post("/login", (req, res) => {
       //ハッシュ登録パスワードとハッシュ入力パスワードを比べる
       const plain = req.body.password;
       const hash = results[0].password;
-      //console.log(plain);
-      //console.log(hash);
       bcrypt.compare(plain, hash, (error, isEqual) => {
         if (isEqual) {
           req.session.userId = results[0].id;
           req.session.username = results[0].username;
-          //console.log("SAME");
           res.redirect("/");
         } else {
-          //console.log("NO-SAME");
           errors.push("※パスワードが間違っています");
           res.render("login.ejs", {
             errors: errors,

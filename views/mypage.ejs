@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/stylesheets/stylesheet2.css" />
+    <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
     <script src="/javascripts/script1.js" ></script>
 
   </head>
@@ -23,43 +23,70 @@
 
       <!--表示選択ゾーン-->
       <div class="container-header">
-        <h1>問答リスト</h1>
+        <h1>マイページ</h1>
+        <a href="/mypage/create" class="btn btn-mid">新規作成</a>
       </div>
-      <a href="/mypage/create" class="cancel-button">新規作成</a>
       <form action="/mypage/reload" method="post">
-        <li>
-          <p>科目</p>
-          <select name="subject" id="subject" onChange="updateCategory()">
-            <option value="">選択してください</option>
-            <option value="math"<% if (myselect === 'math') { %>selected<% } %>>数学</option>
-            <option value="english"<% if (myselect === 'english') { %>selected<% } %>>英語</option>
-            <option value="japanese"<% if (myselect === 'japanese') { %>selected<% } %>>国語</option>
-            <option value="sostudy"<% if (myselect === 'sostudy') { %>selected<% } %>>社会</option>
-            <option value="science"<% if (myselect === 'science') { %>selected<% } %>>理科</option>
-            <option value="zatugaku"<% if (myselect === 'zatugaku') { %>selected<% } %>>雑学</option>
-          </select>
-          <h6><%= subjecterror %></h6>
-          <p>区分</p>
-          <select name="category" id="category" onChange="updateTangen()"></select>
-          <h6><%= categoryerror %></h6>
-          <p>単元</p>
-          <select name="tangen" id="tangen"></select>
-          <h6><%= tangenerror %></h6>
-          <p>My-MonDo</p>
-          <div class="toggle_button">
-            <label for="toggle" class="toggle"></label>
-            <input id="toggle" type="checkbox" name="mymondo" />
+        <div class="select">
+          <div class="pulldown">
+            <p>科目</p>
+            <select name="subject" id="subject" onChange="updateCategory()">
+              <option value="">選択してください</option>
+              <option value="math"<% if (myselect === 'math') { %>selected<% } %>>数学</option>
+              <option value="english"<% if (myselect === 'english') { %>selected<% } %>>英語</option>
+              <option value="japanese"<% if (myselect === 'japanese') { %>selected<% } %>>国語</option>
+              <option value="sostudy"<% if (myselect === 'sostudy') { %>selected<% } %>>社会</option>
+              <option value="science"<% if (myselect === 'science') { %>selected<% } %>>理科</option>
+              <option value="zatugaku"<% if (myselect === 'zatugaku') { %>selected<% } %>>雑学</option>
+            </select>
+            <div class="error-message"><h6><%= subjecterror %></h6></div>
           </div>
-          <div>
+          <div class="pulldown">
+            <p>区分</p>
+            <select name="category" id="category" onChange="updateTangen()"><option value="">選択してください</option></select>
+            <div class="error-message"><h6><%= categoryerror %></h6></div>
+          </div>
+          <div class="pulldown">
+            <p>単元</p>
+            <select name="tangen" id="tangen"><option value="">選択してください</option></select>
+            <div class="error-message"><h6><%= tangenerror %></h6></div>
+          </div>
+          <div class="toggle_button">
+            <p>My-MonDo</p>
+            <label for="toggle" class="toggle"></label>
+            <input id="toggle" type="checkbox" name="mymondo" <% if (mymondo==="on"){ %>checked<% } %>/>
+          </div>
+          <div class="reload">
             <input type="submit" value="表示" formaction="/mypage/reload" />
           </div>
-        </li>
+        </div>
       </form>
+     
+      <form action="/print/check" method="post" id="checkPrint" >
+        <div class="quecount">
+          <p>問題数</p>
+            <div class="count">
+              <select name="quecount" id="quecount">
+                <option value="5">5問</option>
+                <option value="10">10問</option>
+                <option value="15" selected >15問</option>
+              </select>
+            </div>
+        </div>
+        <div class="print">
+          <input type="hidden" name="subject" value="<%= tableName %>" />
+          <input type="hidden" name="category" value="<%= category %>" />
+          <input type="hidden" name="tangen" value="<%= tangen %>" />
+          <input type="submit" class="" value="選択印刷" />
+        </div>
+        <div class="error-message"><%=checkerror%></div>
+
+
       <!--一覧表示ゾーン-->
-      <form action ="/print/check" method="post">
+     
         <div class="index-table-wrapper">
           <div class="table-head">
-            <input type="checkbox" id="allCheckbox" />
+            <input type="checkbox" class="checkbox" id="allCheckbox" />
             <label for="allCheckbox">全選択 / 全解除</label>
             <span class="id-column">ID</span>
             <span class="textcategory-column">区分</span>
@@ -73,7 +100,7 @@
             <% lists.forEach((list) =>{ %>
             <li>
               <div class="user-data">
-                <input type="checkbox" class="checkbox" name="check" value="<%= list.id %>" />
+                <input type="checkbox" class="checkbox" name="check" value="<%= list.id %>" form="checkPrint" />
                 <span class="id-column"><%= list.id %></span>
                 <span class="textcategory-column"><%= list.categoryLabel %></span>
                 <span class="tangen-column"><%= list.tangenLabel %></span>
@@ -83,41 +110,31 @@
                 <span class="date-column"><%= list.date %></span>
               </div>
 
-              <div class="item-menu">
+              <div class="list-menu">
                 <% if (locals.username===list.editor) { %>
-                <form action="/delete/<%= list.id %>" method="post">
-                  <input type="hidden" name="tableName" value="<%= tableName %>" />
-                  <input type="hidden" name="category" value="<%= category %>" />
-                  <input type="hidden" name="id" value="<%= list.id %>" />
-                  <input type="submit" value="削除" />
-                </form>
-                <form action="/edit/<%= list.id %>" method="post">
-                  <input type="hidden" name="tableName" value="<%= tableName %>" />
-                  <input type="hidden" name="category" value="<%= category %>" />
-                  <input type="hidden" name="id" value="<%= list.id %>" />
-                  <input type="submit" value="編集" />
-                </form>
-                <% } %>
+                  <form action="/mypage/delete/<%= list.id %>" method="post">
+                    <input type="hidden" name="tableName" value="<%= tableName %>" />
+                    <input type="hidden" name="category" value="<%= category %>" />
+                    <input type="hidden" name="tangen" value="<%= tangen %>" />
+                    <input type="hidden" name="id" value="<%= list.id %>" />
+                    <input type="submit" value="削除" />
+                  </form>
+                  <form action="/mypage/edit/<%= list.id %>" method="post">
+                    <input type="hidden" name="tableName" value="<%= tableName %>" />
+                    <input type="hidden" name="category" value="<%= category %>" />
+                    <input type="hidden" name="tangen" value="<%= tangen %>" />
+                    <input type="hidden" name="id" value="<%= list.id %>" />
+                    <input type="submit" value="編集" />
+                  </form>
+                  <% } %>
               </div>
             </li>
             <% }); %>
           </ul>
         </div>
-        <div class="count">
-          <input type="radio" name="quecount" value="5" />5問
-          <input type="radio" name="quecount" value="10" />10問
-          <input type="radio" name="quecount" value="15" checked />15問
-        </div>
-        <div class="print">
-          <input type="hidden" name="tableName" value="<%= tableName %>" />
-          <input type="hidden" name="tangen" value="<%= tangen %>" />
-          <input type="submit" class="btn" value="印刷" />
-        </div>
-      </form>
-      <!--新規作成ゾーン-->
 
+        </form>
     </div>
-
     <!--フッター呼び出し-->
     <%- include('footer'); %>
   </body>

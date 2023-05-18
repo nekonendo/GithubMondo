@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/stylesheets/stylesheet2.css" />
+    <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
     <script src="/javascripts/script3.js" ></script>
 
   </head>
@@ -21,17 +21,13 @@
     <%- include('header'); %>
 
     <!--本文-->
-
-    <div class="container">
-      <div class="container-header">
-        <div class="container-header">
-          <h1>問答の新規作成</h1>
-        </div>
-        <a href="/mypage" class="cancel-button">キャンセル</a>
-      </div>
-        <p class="form-label">問答</p>
+    <div class="edit">
+    <div class="container">          
+      <div class="ctl">
+        <h2>問答の新規作成</h2>
         <form action="/mypage/create" method="post">
-          <li>
+          <div class="select">
+            <div class="pulldown">
             <p>科目</p>
             <select name="subject" id="subject" onChange="updateCategory()">
               <option value="">選択してください</option>
@@ -43,21 +39,29 @@
               <option value="zatugaku"<% if (myselect === 'zatugaku') { %>selected<% } %>>雑学</option>
             </select>
             <h6><%= subjecterror %></h6>
-            <p>区分</p>
-            <select name="category" id="category" onChange="updateTangen()"></select>
-            <h6><%= categoryerror %></h6>
-            <p>単元</p>
-            <select name="tangen" id="tangen"></select>
-            <h6><%= tangenerror %></h6>
-              <p class="form-label">問題</p>
+           </div>
+           <div class="pulldown">
+              <p>区分</p>
+              <select name="category" id="category" onChange="updateTangen()"></select>
+              <h6><%= categoryerror %></h6>
+            </div>
+            <div class="pulldown">
+              <p>単元</p>
+              <select name="tangen" id="tangen"></select>
+              <h6><%= tangenerror %></h>
+            </div>
+          </div>
+              <p>問題</p>
               <input type="text" name="question" />
-              <p class="form-label">解答</p>
+              <p>解答</p>
               <input type="text" name="answer" />
-              <input type="submit" value="作成する" />
+              <input type="submit" class="btn" value="作成する" />
           </li>
+          <a href="/mypage">マイページへ戻る</a>
         </form>
+      </div>
     </div>
-
+</div>
     <!--フッター呼び出し-->
     <%- include('footer'); %>
   </body>

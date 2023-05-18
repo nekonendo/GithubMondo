@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "KleeOne-Regular";
+  src: url("/fontfile/KleeOne-Regular.ttf") format("truetype");
+  /* フォントファイルのパスはpublicディレクトリを基準として指定します */
+}
+
 body {
-  font-family: "UD デジタル 教科書体 N-R";
+  font-family: "KleeOne-Regular", sans-serif;
   background-color: #999999;
   font-size: 16pt;
 }
@@ -70,6 +76,33 @@ li {
   padding: 10px;
 }
 
+/*・・・・・・・・・ルビ・・・・・・・・・*/
+ruby[data-ruby] {
+  position: relative;
+}
+ruby[data-ruby]::before {
+  content: attr(data-ruby);
+  position: absolute;
+  left: -2em;
+  top: 0.3em;
+  right: -1.5em;
+  text-align: center;
+  font-size: 0.5em;
+  color: black;
+}
+.jpn-mondo {
+  font-size: 20px;
+  text-align: center;
+}
+.jpn-mondo .mon {
+  font-size: 20px;
+  border: solid 1px #454545;
+  margin: 3px 0;
+  padding: 4px 0;
+  padding-left: 4px;
+  color: white;
+}
+
 /*ヘッダー*/
 header {
   height: auto;
@@ -101,7 +134,7 @@ header {
   float: left;
   border-bottom: 1px solid rgb(77, 77, 77);
   writing-mode: horizontal-tb;
-  text-align: center;
+
   padding-top: 1mm;
 }
 .header-right {
@@ -180,6 +213,7 @@ footer {
     margin: 0;
     size: auto; /* サイズを自動に設定 */
     writing-mode: vertical-rl;
+    text-align: center;
     text-orientation: upright;
   }
 

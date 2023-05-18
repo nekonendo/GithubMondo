@@ -13,23 +13,23 @@
   </head>
   <body>
     <div class="page">
-      <%- include('pdfheader'); %>
+      <%- include('printHeader'); %>
       <div class="area">
         <div class="odai">◎次の問いに答えなさい</div>
         <div class="svgImg" id="formula"><%- imgTag1 %></div>
       </div>
-      <%- include('pdffooter'); %>
+      <%- include('printFooter'); %>
     </div>
     <!--ページ区切り-->
     <div class="page-break"></div>
     <div class="page">
-      <%- include('pdfheader'); %>
+      <%- include('printHeader'); %>
       <div class="area2">
         <div class="odai">●解答</div>
         <div class="svgImg" id="formula"><%- imgTag2 %></div>
       </div>
       <div class="advarea"></div>
-      <%- include('pdffooter'); %>
+      <%- include('printFooter'); %>
     </div>
   </body>
 </html>

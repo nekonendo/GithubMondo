@@ -30,6 +30,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
+////////////////     数学の印刷     /////////////////
+
 router.post("/math", async (req, res) => {
   const quecount = parseInt(req.body.quecount);
   const tableName = req.body.tableName;
@@ -61,7 +63,6 @@ router.post("/math", async (req, res) => {
   }
   tangen.sort(() => Math.random() - 0.5); //tangenをランダムに並べる
   tangen.splice(15, tangen.length - 15); //余分なtangenを切り捨て
-
   console.log(tangen);
 
   async function getQueryResults(tangen, tableName) {
@@ -109,10 +110,8 @@ router.post("/math", async (req, res) => {
         return;
       }
     }
-
     return queryResults;
   }
-
   const queryResults = await getQueryResults(tangen, tableName); // 1. getQueryResults関数の呼び出しを非同期に行う
   console.log(queryResults);
   const mathprint = req.body;
@@ -428,84 +427,88 @@ router.post("/math", async (req, res) => {
           const svgBase642 = Buffer.from(svg2).toString("base64"); // Base64エンコードされたSVG
           const imgTag2 = `<img src="data:image/svg+xml;base64,${svgBase642}" />`; // imgタグ
 
-          res.render("mathprint", { imgTag2, imgTag1, quecount });
+          res.render("mathPrint", { imgTag2, imgTag1, quecount });
         }
       );
     }
   );
 });
 
-//英語、社会、理科、雑学
-router.post("/other", async (req, res) => {
-  const quecount = parseInt(req.body.quecount);
-  const tableName = req.body.tableName;
-  let tangen = req.body.tangen;
-  const printrange = req.body.printrange;
-  if (tangen && Array.isArray(tangen)) {
-    tangen.forEach((tang) => {
-      console.log("tangen is array");
-    });
-  } else if (typeof tangen === "string") {
-    //選択が１つだった場合オブジェクトを配列にする
-    tangen = [tangen];
-    tangen.forEach((tang) => {
-      console.log("tangen is string");
-    });
-  } else {
-    //選択されていなかった時
-    console.log("tangen = null");
-    if (tableName === "sostudy") {
-      tangen = ["jomon", "yayoi", "kohun", "asuka"];
-    } else if (tableName === "science") {
-      tangen = ["scseibutu1", "sckagaku1", "scbuturi1", "sctigaku1"];
-    } else if (tableName === "zatugaku") {
-      tangen = ["zatu1", "zatu2", "zatu3", "zatu4"];
-    } else if (tableName === "japanese") {
-      tangen = ["wkanji1", "wkanji2", "wkanji3", "wkanji4"];
+////////////////     英語、国語、社会、理科、雑学の印刷     /////////////////
+
+router.post(
+  "/other",
+  (req, res, next) => {
+    const quecount = parseInt(req.body.quecount);
+    const tableName = req.body.tableName;
+    const category = req.body.category;
+    let tangen = req.body.tangen;
+    const printrange = req.body.printrange;
+    const categoryerror = [];
+    const tangenerror = [];
+    const errors = [];
+    console.log(req.body);
+    if (category === "1" || category === "") {
+      categoryerror.push("区分を選択してください");
+      errors.push("cateerror");
     }
-  }
-  console.log(tangen);
-  //ここからまるごと
-  if (printrange === "printall") {
-    async function getQueryResults(tangen, tableName) {
-      console.log("printall");
-      try {
-        const dataCountResult = await new Promise((resolve, reject) => {
-          connection.query(
-            `SELECT COUNT(question) FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ?`,
-            [tangen],
-            (error, results) => {
-              if (error) {
-                console.error(error);
-                reject(error);
-              }
-              resolve(results);
-            }
-          );
-        });
-        const dataCount = dataCountResult[0]["COUNT(question)"];
-        const pageCount = Math.ceil(dataCount / quecount);
-        const queryResults = await new Promise((resolve, reject) => {
-          connection.query(
-            `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.tangen = ?`,
-            [tangen],
-            (error, results) => {
-              if (error) {
-                console.error(error);
-                reject(error);
-              }
-              resolve(results);
-            }
-          );
-        });
-        for (let j = 0; j < queryResults.length; j++) {
-          let count = queryResults[j].count;
-          let newCount = count + 1;
-          let id = queryResults[j].id;
-          await new Promise((resolve, reject) => {
+    if (tangen === "1" || tangen === "") {
+      tangenerror.push("単元を選択してください");
+      errors.push("tanerror");
+    }
+    if (errors.length > 0) {
+      console.log(errors);
+      res.render("eng.ejs", {
+        categoryerror: categoryerror,
+        tangenerror: tangenerror,
+        category: category,
+      });
+    } else {
+      next();
+    }
+  },
+  async (req, res) => {
+    const quecount = parseInt(req.body.quecount);
+    const tableName = req.body.tableName;
+    const category = req.body.category;
+    let tangen = req.body.tangen;
+    const printrange = req.body.printrange;
+    const categoryerror = [];
+    const tangenerror = [];
+    const errors = [];
+    if (tangen && Array.isArray(tangen)) {
+      tangen.forEach((tang) => {
+        console.log("tangen is array");
+      });
+    } else if (typeof tangen === "string") {
+      //選択が１つだった場合オブジェクトを配列にする
+      tangen = [tangen];
+      tangen.forEach((tang) => {
+        console.log("tangen is string");
+      });
+    } else {
+      //選択されていなかった時
+      console.log("tangen = null");
+      if (tableName === "sostudy") {
+        tangen = ["jomon", "yayoi", "kohun", "asuka"];
+      } else if (tableName === "science") {
+        tangen = ["scseibutu1", "sckagaku1", "scbuturi1", "sctigaku1"];
+      } else if (tableName === "zatugaku") {
+        tangen = ["zatu1", "zatu2", "zatu3", "zatu4"];
+      } else if (tableName === "japanese") {
+        tangen = ["wkanji1", "wkanji2", "wkanji3", "wkanji4"];
+      }
+    }
+    console.log(tangen);
+    //ここからまるごと
+    if (printrange === "printall") {
+      async function getQueryResults(tangen, tableName) {
+        console.log("printall");
+        try {
+          const dataCountResult = await new Promise((resolve, reject) => {
             connection.query(
-              `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-              [newCount, id],
+              `SELECT COUNT(question) FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ?`,
+              [tangen],
               (error, results) => {
                 if (error) {
                   console.error(error);
@@ -515,51 +518,221 @@ router.post("/other", async (req, res) => {
               }
             );
           });
+          const dataCount = dataCountResult[0]["COUNT(question)"];
+          const pageCount = Math.ceil(dataCount / quecount);
+          const queryResults = await new Promise((resolve, reject) => {
+            connection.query(
+              `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.tangen = ?`,
+              [tangen],
+              (error, results) => {
+                if (error) {
+                  console.error(error);
+                  reject(error);
+                }
+                resolve(results);
+              }
+            );
+          });
+          for (let j = 0; j < queryResults.length; j++) {
+            let count = queryResults[j].count;
+            let newCount = count + 1;
+            let id = queryResults[j].id;
+            await new Promise((resolve, reject) => {
+              connection.query(
+                `UPDATE ${tableName} SET count = ? WHERE id = ?`,
+                [newCount, id],
+                (error, results) => {
+                  if (error) {
+                    console.error(error);
+                    reject(error);
+                  }
+                  resolve(results);
+                }
+              );
+            });
+          }
+          return { queryResults, pageCount };
+        } catch (error) {
+          console.error(error);
+          throw error;
         }
-        return { queryResults, pageCount };
+      }
+      try {
+        const { queryResults, pageCount } = await getQueryResults(tangen, tableName);
+        if (tableName === "japanese") {
+          res.render("jpnPrint", { queryResults, pageCount, quecount, tangen, tableName });
+        } else {
+          res.render("otherPrint", { queryResults, pageCount, quecount, tangen, tableName });
+        }
       } catch (error) {
         console.error(error);
-        throw error;
+        res.status(500).send("Server Error");
       }
-    }
-    try {
-      const { queryResults, pageCount } = await getQueryResults(tangen, tableName);
+
+      //ここまでまるごと
+
+      //ここからシャッフル
+    } else if (printrange === "printshufful") {
+      console.log("printshufful");
+      const length = tangen.length;
+      const pageCount = 1;
+      for (let i = 0; i < length; i++) {
+        //tangenの個数分繰り返す
+        for (let j = 0; j < 14; j++) {
+          //15倍にする
+          tangen.push(tangen[i]);
+        }
+      }
+      tangen.sort(() => Math.random() - 0.5); //tangenをランダムに並べる
+      tangen.splice(15, tangen.length - 15); //余分なtangenを切り捨て
+
+      async function getQueryResults(tangen, tableName) {
+        let queryResults = [];
+        for (let i = 0; i < tangen.length; i++) {
+          const tang = tangen[i];
+          try {
+            const results = await new Promise((resolve, reject) => {
+              connection.query(
+                `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ? ORDER BY RAND() LIMIT 1`,
+                [tang],
+                (error, results) => {
+                  if (error) {
+                    console.error(error);
+                    reject(error);
+                  }
+                  resolve(results);
+                }
+              );
+            });
+            queryResults.push(results);
+            const newCount = (results.count || 0) + 1;
+            const id = results[0].id;
+            await new Promise((resolve, reject) => {
+              connection.query(
+                `UPDATE ${tableName} SET count = ? WHERE id = ?`,
+                [newCount, id],
+                (error, results) => {
+                  if (error) {
+                    consoles.error(error);
+                    reject(error);
+                  }
+                  resolve();
+                }
+              );
+            });
+          } catch (error) {
+            console.error(error);
+            res.status(500).send("エラーが発生しました。");
+            return;
+          }
+        }
+        return queryResults;
+      }
+      //ここまでシャッフル
+      let queryResults = await getQueryResults(tangen, tableName);
+      queryResults = queryResults.flat();
       if (tableName === "japanese") {
-        res.render("jpnprint", { queryResults, pageCount, quecount, tangen, tableName });
+        res.render("jpnPrint", { queryResults, pageCount, quecount, tangen, tableName });
       } else {
-        res.render("otherprint", { queryResults, pageCount, quecount, tangen, tableName });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Server Error");
-    }
-
-    //ここまでまるごと
-
-    //ここからシャッフル
-  } else if (printrange === "printshufful") {
-    console.log("printshufful");
-    const length = tangen.length;
-    const pageCount = 1;
-    for (let i = 0; i < length; i++) {
-      //tangenの個数分繰り返す
-      for (let j = 0; j < 14; j++) {
-        //15倍にする
-        tangen.push(tangen[i]);
+        res.render("otherPrint", { queryResults, pageCount, quecount, tangen, tableName });
       }
     }
-    tangen.sort(() => Math.random() - 0.5); //tangenをランダムに並べる
-    tangen.splice(15, tangen.length - 15); //余分なtangenを切り捨て
+  }
+);
 
-    async function getQueryResults(tangen, tableName) {
+///////////////     マイページからの印刷     ////////////////
+
+router.post(
+  "/check",
+  (req, res, next) => {
+    //選択忘れチェック
+    const checkedId = req.body.check;
+    const tableName = req.body.subject;
+    const myselect = req.body.subject;
+    const category = req.body.category;
+    const tangen = req.body.tangen;
+    const mymondo = req.body.mymondo;
+    const lists = [];
+    const subjecterror = [];
+    const categoryerror = [];
+    const tangenerror = [];
+    const checkerror = [];
+    const errors = [];
+    if (checkedId === void 0) {
+      console.log("mkjbnjbkb");
+      checkerror.push("印刷する問答を選択してください");
+      errors.push("suberror");
+    }
+    if (errors.length > 0) {
+      let Editor = req.session.username;
+
+      if (mymondo === "on") {
+        Editor = "and editor = " + "'" + Editor + "'";
+      } else {
+        Editor = "";
+      }
+      connection.query(
+        `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ? ${Editor}`,
+        [req.body.tangen],
+        (error, results) => {
+          if (error) {
+            console.error(error);
+            res.status(500).send("エラーが発生しました。");
+            return;
+          }
+          results.forEach((list) => {
+            if (list.date === null) {
+              list.date = "****";
+            } else {
+              //日付表示フォーマット
+              const date2 = list.date;
+              const y = date2.getFullYear();
+              const m = date2.getMonth() + 1;
+              const d = date2.getDate();
+              const date3 = y + "/" + m + "/" + d;
+              list.date = date3;
+            }
+          });
+
+          res.render("mypage.ejs", {
+            lists: results,
+            tableName: tableName,
+            category: category,
+            tangen: tangen,
+            subjecterror: subjecterror,
+            categoryerror: categoryerror,
+            tangenerror: tangenerror,
+            checkerror: checkerror,
+            myselect: myselect,
+          });
+        }
+      );
+    } else {
+      next();
+    }
+  },
+
+  async (req, res) => {
+    const body = req.body;
+    console.log(body);
+    const checkedId = req.body.check;
+    console.log(checkedId);
+    const tableName = req.body.subject;
+    const tangen = req.body.tangen;
+    const dataCount = checkedId.length;
+    const quecount = req.body.quecount;
+    const pageCount = Math.ceil(dataCount / quecount);
+    console.log("innsatusimasu");
+
+    async function getQueryResults(checkedId, tableName) {
       let queryResults = [];
-      for (let i = 0; i < tangen.length; i++) {
-        const tang = tangen[i];
+      for (let i = 0; i < checkedId.length; i++) {
+        const id = checkedId[i];
         try {
           const results = await new Promise((resolve, reject) => {
             connection.query(
-              `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ? ORDER BY RAND() LIMIT 1`,
-              [tang],
+              `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.id = ?`,
+              [id],
               (error, results) => {
                 if (error) {
                   console.error(error);
@@ -570,12 +743,12 @@ router.post("/other", async (req, res) => {
             );
           });
           queryResults.push(results);
-          const newCount = (results.count || 0) + 1;
-          const id = results[0].id;
+          const newCount = (results[0].count || 0) + 1;
+          const resultId = results[0].id;
           await new Promise((resolve, reject) => {
             connection.query(
               `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-              [newCount, id],
+              [newCount, resultId],
               (error, results) => {
                 if (error) {
                   consoles.error(error);
@@ -593,75 +766,20 @@ router.post("/other", async (req, res) => {
       }
       return queryResults;
     }
-    //ここまでシャッフル
-    let queryResults = await getQueryResults(tangen, tableName);
+    let queryResults = await getQueryResults(checkedId, tableName);
+    console.log(queryResults);
     queryResults = queryResults.flat();
+    console.log(queryResults);
+    console.log(pageCount);
+    console.log(quecount);
+    console.log(tangen);
+    console.log(tableName);
     if (tableName === "japanese") {
-      res.render("jpnprint", { queryResults, pageCount, quecount, tangen, tableName });
+      res.render("jpnPrint", { queryResults, pageCount, quecount, tangen, tableName });
     } else {
-      res.render("otherprint", { queryResults, pageCount, quecount, tangen, tableName });
+      res.render("otherPrint", { queryResults, pageCount, quecount, tangen, tableName });
     }
   }
-});
-
-router.post("/check", async (req, res) => {
-  const checkedId = req.body.check;
-  const tableName = req.body.tableName;
-  const tangen = req.body.tangen;
-  const dataCount = checkedId.length;
-  const quecount = req.body.quecount;
-  const pageCount = Math.ceil(dataCount / quecount);
-  console.log("innsatusimasu");
-  async function getQueryResults(checkedId, tableName) {
-    let queryResults = [];
-    for (let i = 0; i < checkedId.length; i++) {
-      const id = checkedId[i];
-      try {
-        const results = await new Promise((resolve, reject) => {
-          connection.query(
-            `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.id = ?`,
-            [id],
-            (error, results) => {
-              if (error) {
-                console.error(error);
-                reject(error);
-              }
-              resolve(results);
-            }
-          );
-        });
-        queryResults.push(results);
-        const newCount = (results[0].count || 0) + 1;
-        const resultId = results[0].id;
-        await new Promise((resolve, reject) => {
-          connection.query(
-            `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-            [newCount, resultId],
-            (error, results) => {
-              if (error) {
-                consoles.error(error);
-                reject(error);
-              }
-              resolve();
-            }
-          );
-        });
-      } catch (error) {
-        console.error(error);
-        res.status(500).send("エラーが発生しました。");
-        return;
-      }
-    }
-    return queryResults;
-  }
-  let queryResults = await getQueryResults(checkedId, tableName);
-  queryResults = queryResults.flat();
-  console.log(queryResults);
-  console.log(pageCount);
-  console.log(quecount);
-  console.log(tangen);
-  console.log(tableName);
-  res.render("otherprint", { queryResults, pageCount, quecount, tangen, tableName });
-});
+);
 
 module.exports = router;

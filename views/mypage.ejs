@@ -23,7 +23,13 @@
       <!--表示選択ゾーン-->
       <div class="container-header">
         <h1>マイページ</h1>
-        <a href="/mypage/create" class="btn btn-mid">新規作成</a>
+
+        <div class="setumei">
+          <p>このページでは単元ごとに自由に問題を選んで印刷ができます。<br>
+          自分で問題を新規作成したり、その問題の編集・削除ができます。<br>
+          My-Mondoにチェックを入れると自分が作った問題だけを表示できます。</p>
+        </div>
+        <div class="new"><a href="/mypage/create" class="btn btn-mid">新規作成</a></div>
       </div>
       <div class="select">
         <form action="/mypage/reload" method="post">
@@ -76,8 +82,8 @@
           </div>
           <div class="pulldown">
               <input type="hidden" name="subject" value="<%= tableName %>" />
-              <input type="hidden" name="category" value="<%= category %>" />
-              <input type="hidden" name="tangen" value="<%= tangen %>" />
+
+              <input type="hidden" name="mymondo" value="<%= mymondo %>" />
               <input type="submit" class="btn-small" value="選択印刷" />
               <div class="error-message"><%=checkerror%></div>
           </div>
@@ -114,7 +120,7 @@
                 <span class="answer-column"><%= list.answer %></span>
                 <span class="editor-column"><%= list.editor %></span>
                 <span class="date-column"><%= list.date %></span>
-              </div>
+              
 
               <div class="list-menu">
                 <% if (locals.username===list.editor) { %>
@@ -133,6 +139,7 @@
                     <input type="submit" value="編集" />
                   </form>
                   <% } %>
+                </div>
               </div>
               </li>
             <% }); %>

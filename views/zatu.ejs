@@ -5,16 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon-Do</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="stylesheets/stylesheet1.css" />
   </head>
 
   <!--ボディ-->
   <body>
     <!--ヘッダー呼び出し-->
+
     <%- include('header'); %>
     <!--本文-->
     <div class="choice">
@@ -23,32 +21,32 @@
           <div class="quecount">
             <h2>問題数</h2>
             <div class="count">
-              <input type="radio" name="quecount" value="5" />5問
-              <input type="radio" name="quecount" value="10" />10問
-              <input type="radio" name="quecount" value="15" checked />15問
+              <label for="5"><input type="radio" name="quecount" value="5" id="5" />5問</label>
+              <label for="10"> <input type="radio" name="quecount" value="10" id="10" />10問</label>
+              <label for="15"><input type="radio" name="quecount" value="15" id="15" checked />15問</label>
             </div>
           </div>
           <div class="tangen">
             <h2>出題範囲を選択してください</h2>
             <div class="zatugaku1">
               <h3>理科系</h3>
-              <input type="checkbox" name="tangen" value="zatu1" />宇宙
-              <input type="checkbox" name="tangen" value="zatu2" />地球　
-              <input type="checkbox" name="tangen" value="zatu3" />生き物<br />
+              <label for="zatu1"><input type="checkbox" name="tangen" value="zatu1" id="zatu1" />宇宙</label>
+              <label for="zatu2"><input type="checkbox" name="tangen" value="zatu2" id="zatu2" />地球</label>　
+              <label for="zatu3"><input type="checkbox" name="tangen" value="zatu3" id="zatu3" />生き物</label><br />
             </div>
             <div class="zatugaku2">
               <h3>社会系</h3>
-              <input type="checkbox" name="tangen" value="zatu4" />歴史
-              <input type="checkbox" name="tangen" value="zatu5" />世界の国々<br />
+              <label for="zatu4"><input type="checkbox" name="tangen" value="zatu4" id="zatu4" />歴史</label>
+              <label for="zatu5"><input type="checkbox" name="tangen" value="zatu5" id="zatu5" />世界の国々</label><br />
             </div>
             <div class="zatugaku3">
               <h3>芸術系</h3>
-              <input type="checkbox" name="tangen" value="zatu6" />文学
-              <input type="checkbox" name="tangen" value="zatu7" />音楽<br />
+              <label for="zatu6"><input type="checkbox" name="tangen" value="zatu6" id="zatu6" />文学</label>
+              <label for="zatu7"><input type="checkbox" name="tangen" value="zatu7" id="zatu7" />音楽</label><br />
             </div>
             <div class="zatugaku4">
               <h3>一般</h3>
-              <input type="checkbox" name="tangen" value="zatu8" />インターネット<br />
+              <label for="zatu8"><input type="checkbox" name="tangen" value="zatu8" id="zatu8" />インターネット</label><br />
             </div>
           </div>
         </div>

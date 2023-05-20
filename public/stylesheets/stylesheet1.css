@@ -50,12 +50,19 @@ li {
 img:hover {
   opacity: 0.7;
 }
+
+/*チェックボックス改善*/
+label,
+input[type="checkbox"] {
+  cursor: pointer;
+}
 /*ボタン共通*/
 .btn {
   font-size: 24px;
   padding: 8px 90px;
   font-weight: bold;
   color: white;
+  border: none;
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
   background-color: #50c1e9;
   display: inline-block;
@@ -113,7 +120,24 @@ img:hover {
   top: 7px;
 }
 /*押しボタン小*/
-
+.btn-small {
+  width: auto;
+  height: 40px;
+  border: none;
+  display: block;
+  background-color: rgb(162, 162, 162);
+  box-shadow: 0px 5px rgb(67, 67, 67);
+}
+.btn-small:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  box-shadow: 0px 7px rgb(75, 75, 75);
+}
+.btn-small:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
 /*黄色いベース部分*/
 .ctl {
   padding: 20px 40px;
@@ -190,59 +214,44 @@ textarea[name="content"] {
   height: calc(2em * 15 + 1em);
   line-height: 2;
 }
-input[type="submit"] {
-  font-size: 18px;
-  border: none;
-  height: 54px;
-  padding: 0 90px;
-  width: 60%;
-  margin: 80px auto 0;
-}
 
-/*プルダウン選択*/
-.word label[for="pulldown"] {
-  background-color: #e5e5e5;
-  font-weight: bold;
-  margin-left: 30px;
-  display: block flex;
-  padding: 10px;
-}
 .select {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
-  align-items: center;
-}
-.select li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
+  background-color: #5be7c4;
+  height: 110px;
 }
 .select p {
-  flex: 0 0 30%;
-  margin-right: 10px;
+  font-size: 18px;
+  padding: 5px 0;
+  margin: 0;
+  background-color: #80bcff;
 }
-.select select,
-.select input[type="checkbox"] {
-  flex: 0 0 70%;
-  margin-right: 10px;
+.pulldown {
+  flex: 1 1 200px; /* 各要素の幅を調整してください */
+  margin-right: 10px; /* 各要素の間隔を調整してください */
+  float: left;
+  background-color: #7a57d1;
 }
-.select input[type="submit"] {
-  flex: 1 0 100%;
+.pulldown input[type="submit"] {
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  padding: 2px 5px 8px 8px;
+  margin: 30px auto 0;
+}
+.print {
+  flex: 0 0 auto;
 }
 .error-message {
-  margin-top: 5px;
-  height: 10mm;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-size: 14px;
   color: red;
-}
-/*プルダウン選択　　　不要？？？？？？*/
-.word label[for="pulldown"] {
-  background-color: #e5e5e5;
-  font-weight: bold;
-  margin-left: 30px;
-  display: block flex;
-  padding: 10px;
+  background-color: #80bcff;
 }
 /*印刷範囲選択（まるごと‐シャッフル）*/
 .printcount {
@@ -587,6 +596,10 @@ footer {
   text-align: center;
   margin-right: 0;
 }
+.index-table-wrapper {
+  overflow: auto; /* スクロールバーを表示 */
+  max-width: 100%; /* コンテナの最大幅を設定 */
+}
 .table-head {
   display: flex;
   background-color: #b7cadc;
@@ -596,31 +609,39 @@ footer {
   font-size: 20px;
   line-height: 46px;
   color: #ffffff;
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
 }
-.check-list {
-  width: 90px;
-  height: 20px;
+
+.checkbox-container {
+  width: 10%;
+  text-align: center;
+  font-size: 10px;
 }
 .id-column {
-  width: 72px;
+  width: 5%;
   text-align: center;
+  background-color: #7a45d1;
 }
 .textcategory-column {
-  width: 72px;
+  width: 10%;
   text-align: center;
+  background-color: bisque;
 }
 .tangen-column {
-  width: 72px;
+  width: 10%;
   text-align: center;
+  background-color: #80bcff;
 }
 .question-column {
-  width: 72px;
+  width: 20%;
   text-align: left;
   padding-left: 10px;
+  background-color: chartreuse;
 }
 .answer-column {
-  width: 72px;
+  width: 20%;
   text-align: center;
+  background-color: cyan;
 }
 .grade-column {
   width: 72px;
@@ -629,23 +650,26 @@ footer {
 .date-column {
   width: 72px;
   text-align: center;
+  background-color: #7a57d1;
 }
 .editor-column {
   width: 72px;
   text-align: center;
+  background-color: cornflowerblue;
 }
 .table-body {
+  width: 100%;
   height: 400px;
-  overflow: scroll;
   background-color: #ffffff;
 }
 .table-body li {
-  height: 150px;
+  height: 50px;
   border: 1px solid #f0f4f9;
   border-top: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #8491a5;
 }
 .table-body .checkbox {
   font-size: 16px;
@@ -697,6 +721,8 @@ footer {
 }
 .user-data {
   display: flex;
+  width: 100%;
+  background-color: deeppink;
 }
 .list-menu {
   display: flex;

@@ -24,37 +24,34 @@ router.get("/", (req, res) => {
   const checkerror = [];
   const myselect = [];
   //遷移直後は英語の単元1U0を仮表示する
-  connection.query(
-    "SELECT * FROM englishsub JOIN english ON englishsub.tangen = english.tangen WHERE englishsub.tangen= '1U0'",
-    (error, results) => {
-      results.forEach((list) => {
-        if (list.date === null) {
-          list.date = "****";
-        } else {
-          //日付表示フォーマット
-          const date2 = list.date;
-          const y = date2.getFullYear();
-          const m = date2.getMonth() + 1;
-          const d = date2.getDate();
-          const date3 = y + "/" + m + "/" + d;
-          list.date = date3;
-        }
-      });
-      console.log(mymondo);
-      res.render("mypage.ejs", {
-        lists: results,
-        tableName: tableName,
-        category: category,
-        tangen: tangen,
-        mymondo: mymondo,
-        subjecterror: subjecterror,
-        categoryerror: categoryerror,
-        tangenerror: tangenerror,
-        checkerror: checkerror,
-        myselect: myselect,
-      });
-    }
-  );
+  connection.query("SELECT * FROM englishsub JOIN english ON englishsub.tangen = english.tangen WHERE englishsub.tangen= '1U0'", (error, results) => {
+    results.forEach((list) => {
+      if (list.date === null) {
+        list.date = "****";
+      } else {
+        //日付表示フォーマット
+        const date2 = list.date;
+        const y = date2.getFullYear();
+        const m = date2.getMonth() + 1;
+        const d = date2.getDate();
+        const date3 = y + "/" + m + "/" + d;
+        list.date = date3;
+      }
+    });
+    console.log(mymondo);
+    res.render("mypage.ejs", {
+      lists: results,
+      tableName: tableName,
+      category: category,
+      tangen: tangen,
+      mymondo: mymondo,
+      subjecterror: subjecterror,
+      categoryerror: categoryerror,
+      tangenerror: tangenerror,
+      checkerror: checkerror,
+      myselect: myselect,
+    });
+  });
 });
 
 //マイページの表を再表示
@@ -168,18 +165,27 @@ router.get("/create", (req, res) => {
   const tableName = [];
   const category = [];
   const tangen = [];
+  const question = [];
+  const answer = [];
   const subjecterror = [];
   const categoryerror = [];
   const tangenerror = [];
+  const questionerror = [];
+  const answererror = [];
   const checkerror = [];
   const myselect = [];
+  console.log(tableName, category, tangen);
   res.render("create.ejs", {
     tableName: tableName,
     category: category,
     tangen: tangen,
+    question: question,
+    answer: answer,
     subjecterror: subjecterror,
     categoryerror: categoryerror,
     tangenerror: tangenerror,
+    questionerror: questionerror,
+    answererror: answererror,
     myselect: myselect,
   });
 });
@@ -192,30 +198,49 @@ router.post(
     const myselect = req.body.subject;
     const category = req.body.category;
     const tangen = req.body.tangen;
+    const question = req.body.question;
+    const answer = req.body.answer;
     const subjecterror = [];
     const categoryerror = [];
     const tangenerror = [];
     const checkerror = [];
+    const questionerror = [];
+    const answererror = [];
     const errors = [];
     if (tableName === "") {
       subjecterror.push("科目を選択してください");
       errors.push("suberror");
     }
-    if (category == "") {
+    if (category === "1") {
       categoryerror.push("区分を選択してください");
       errors.push("cateerror");
     }
-    if (tangen === "") {
+    if (tangen === "1") {
       tangenerror.push("単元を選択してください");
       errors.push("tanerror");
     }
+    if (question === "") {
+      questionerror.push("問題を記入してください");
+      errors.push("queerror");
+    }
+    if (answer === "") {
+      answererror.push("解答を記入してください");
+      errors.push("anserror");
+    }
     if (errors.length > 0) {
+      console.log(errors);
       res.render("create.ejs", {
         tableName: tableName,
+        category: category,
+        tangen: tangen,
+        question: question,
+        answer: answer,
         subjecterror: subjecterror,
         categoryerror: categoryerror,
         tangenerror: tangenerror,
         checkerror: checkerror,
+        questionerror: questionerror,
+        answererror: answererror,
         myselect: myselect,
       });
     } else {
@@ -231,6 +256,8 @@ router.post(
     const subjecterror = [];
     const categoryerror = [];
     const tangenerror = [];
+    const questionerror = [];
+    const answererror = [];
     const checkerror = [];
     connection.query(
       `INSERT INTO ${tableName}(tangen,question,answer,editor,date) VALUES(?,?,?,?,now())`,
@@ -251,6 +278,8 @@ router.post(
           categoryerror: categoryerror,
           tangenerror: tangenerror,
           checkerror: checkerror,
+          questionerror: questionerror,
+          answererror: answererror,
           myselect: myselect,
         });
       }
@@ -265,6 +294,8 @@ router.post("/edit/:id", (req, res) => {
   const tableName = req.body.tableName;
   const category = req.body.category;
   const tangen = req.body.tangen;
+  const questionerror = [];
+  const answererror = [];
   connection.query(
     `SELECT * FROM ${tableName} JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.id=?`,
     [req.params.id],
@@ -275,72 +306,128 @@ router.post("/edit/:id", (req, res) => {
         tableName: tableName,
         category: category,
         tangen: tangen,
+        questionerror: questionerror,
+        answererror: answererror,
       });
     }
   );
 });
 
 //問題の編集
-router.post("/update", (req, res) => {
-  const tableName = req.body.tableName;
-  const category = req.body.category;
-  const tangen = req.body.tangen;
-  const myselect = req.body.tableName;
-  const mymondo = "on";
-  const subjecterror = [];
-  const categoryerror = [];
-  const tangenerror = [];
-  const addsubjecterror = [];
-  const addcategoryerror = [];
-  const addtangenerror = [];
-  const checkerror = [];
-  const errors = [];
-  connection.query(
-    `UPDATE ${tableName} SET question = ?,answer=?,date=now() WHERE id = ?`,
-    [req.body.listQuestion, req.body.listAnswer, req.body.id],
-    (error, results) => {
-      connection.query(
-        `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
-        [req.session.username],
-        (error, results) => {
-          if (error) {
-            console.error(error);
-            res.status(500).send("エラーが発生しました。");
-            return;
+router.post(
+  "/update",
+  (req, res, next) => {
+    const tableName = req.body.tableName;
+    const myselect = req.body.tableName;
+    const category = req.body.category;
+    const tangen = req.body.tangen;
+    const question = req.body.listQuestion;
+    const answer = req.body.listAnswer;
+    console.log(req.body.id);
+    const checkerror = [];
+    const questionerror = [];
+    const answererror = [];
+    const errors = [];
+    let lists = [];
+    console.log(question, answer);
+    connection.query(
+      `SELECT * FROM ${tableName} JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.id=?`,
+      [req.body.id],
+      (error, results) => {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log(results);
+          lists = results;
+          if (question === "") {
+            questionerror.push("問題を記入してください");
+            errors.push("queerror");
           }
-          results.forEach((list) => {
-            if (list.date === null) {
-              list.date = "****";
-            } else {
-              //日付表示フォーマット
-              const date2 = list.date;
-              const y = date2.getFullYear();
-              const m = date2.getMonth() + 1;
-              const d = date2.getDate();
-              const date3 = y + "/" + m + "/" + d;
-              list.date = date3;
-            }
-          });
-          res.render("mypage.ejs", {
-            lists: results,
-            tableName: tableName,
-            category: category,
-            tangen: tangen,
-            mymondo: mymondo,
-            myselect: myselect,
-            subjecterror: subjecterror,
-            categoryerror: categoryerror,
-            tangenerror: tangenerror,
-            checkerror: checkerror,
-            addsubjecterror: addsubjecterror,
-            addcategoryerror: addcategoryerror,
-            addtangenerror: addtangenerror,
-          });
+          if (answer === "") {
+            answererror.push("解答を記入してください");
+            errors.push("anserror");
+          }
+          if (errors.length > 0) {
+            console.log(errors);
+            console.log(lists);
+            res.render("edit.ejs", {
+              lists: lists,
+              tableName: tableName,
+              category: category,
+              tangen: tangen,
+              question: question,
+              answer: answer,
+              questionerror: questionerror,
+              answererror: answererror,
+            });
+          } else {
+            next();
+          }
         }
-      );
-    }
-  );
-});
+      }
+    );
+  },
+  (req, res) => {
+    const tableName = req.body.tableName;
+    const category = req.body.category;
+    const tangen = req.body.tangen;
+    const myselect = req.body.tableName;
+    const mymondo = "on";
+    const subjecterror = [];
+    const categoryerror = [];
+    const tangenerror = [];
+    const addsubjecterror = [];
+    const addcategoryerror = [];
+    const addtangenerror = [];
+    const checkerror = [];
+    const errors = [];
+    connection.query(
+      `UPDATE ${tableName} SET question = ?,answer=?,date=now() WHERE id = ?`,
+      [req.body.listQuestion, req.body.listAnswer, req.body.id],
+      (error, results) => {
+        connection.query(
+          `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
+          [req.session.username],
+          (error, results) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send("エラーが発生しました。");
+              return;
+            }
+            results.forEach((list) => {
+              if (list.date === null) {
+                list.date = "****";
+              } else {
+                //日付表示フォーマット
+                const date2 = list.date;
+                const y = date2.getFullYear();
+                const m = date2.getMonth() + 1;
+                const d = date2.getDate();
+                const date3 = y + "/" + m + "/" + d;
+                list.date = date3;
+              }
+            });
+            res.render("mypage.ejs", {
+              lists: results,
+              tableName: tableName,
+              category: category,
+              tangen: tangen,
+              mymondo: mymondo,
+              myselect: myselect,
+              subjecterror: subjecterror,
+              categoryerror: categoryerror,
+              tangenerror: tangenerror,
+              checkerror: checkerror,
+              addsubjecterror: addsubjecterror,
+              addcategoryerror: addcategoryerror,
+              addtangenerror: addtangenerror,
+            });
+          }
+        );
+      }
+    );
+  }
+);
 
 //問題の削除
 router.post("/delete/:id", (req, res) => {

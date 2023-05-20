@@ -38,26 +38,26 @@
                 <option value="science"<% if (myselect === 'science') { %>selected<% } %>>理科</option>
                 <option value="zatugaku"<% if (myselect === 'zatugaku') { %>selected<% } %>>雑学</option>
               </select>
-              <div class="error-message"><h6><%= subjecterror %></h6></div>
+              <div class="error-message"><%= subjecterror %></div>
            </div>
            <div class="pulldown">
               <p>区分</p>
               <select name="category" id="category" onChange="updateTangen()"></select>
-              <div class="error-message"><h6><%= categoryerror %></h6></div>
+              <div class="error-message"><%= categoryerror %></div>
             </div>
             <div class="pulldown">
               <p>単元</p>
               <select name="tangen" id="tangen"></select>
-              <div class="error-message"><h6><%= tangenerror %></h6></div>
+              <div class="error-message"><%= tangenerror %></div>
             </div>
           </div>
           <div>
             <p>問題</p>
             <input type="text" name="question" value="<%= question %>"/>
-            <div class="error-message"><h6><%= questionerror %></h6></div>
+            <div class="error-message"><%= questionerror %></div>
             <p>解答</p>
             <input type="text" name="answer" value="<%= answer %>"/>
-            <div class="error-message"><h6><%= answererror %></h6></div>
+            <div class="error-message"><%= answererror %></div>
             <input type="submit" class="btn" value="作成する" />
             
           </div>

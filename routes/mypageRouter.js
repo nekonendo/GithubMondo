@@ -140,7 +140,7 @@ router.post(
             list.date = date3;
           }
         });
-
+        console.log("korekore" + tangen);
         res.render("mypage.ejs", {
           lists: results,
           tableName: tableName,
@@ -252,6 +252,8 @@ router.post(
     const myselect = req.body.subject;
     const category = req.body.category;
     const tangen = req.body.tangen;
+    const question = req.body.question;
+    const answer = req.body.answer;
     const mymondo = "on";
     const subjecterror = [];
     const categoryerror = [];
@@ -274,6 +276,8 @@ router.post(
           category: category,
           tangen: tangen,
           mymondo: mymondo,
+          question: question,
+          answer: answer,
           subjecterror: subjecterror,
           categoryerror: categoryerror,
           tangenerror: tangenerror,

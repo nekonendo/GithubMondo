@@ -346,57 +346,11 @@ router.post("/math", async (req, res) => {
     texString2 = ans;
   } else if (quecount == 5) {
     const que =
-      begin +
-      no1 +
-      text1 +
-      br +
-      no2 +
-      text2 +
-      br +
-      no3 +
-      text3 +
-      br +
-      no4 +
-      text4 +
-      br +
-      no5 +
-      text5 +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      end;
+      begin + no1 + text1 + br + no2 + text2 + br + no3 + text3 + br + no4 + text4 + br + no5 + text5 + br + br + br + br + br + br + br + br + end;
     console.log(que);
     texString1 = que;
     const ans =
-      begin +
-      no1 +
-      ans1 +
-      br +
-      no2 +
-      ans2 +
-      br +
-      no3 +
-      ans3 +
-      br +
-      no4 +
-      ans4 +
-      br +
-      no5 +
-      ans5 +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      br +
-      end;
+      begin + no1 + ans1 + br + no2 + ans2 + br + no3 + ans3 + br + no4 + ans4 + br + no5 + ans5 + br + br + br + br + br + br + br + br + end;
 
     console.log(ans);
     texString2 = ans;
@@ -538,17 +492,13 @@ router.post(
             let newCount = count + 1;
             let id = queryResults[j].id;
             await new Promise((resolve, reject) => {
-              connection.query(
-                `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-                [newCount, id],
-                (error, results) => {
-                  if (error) {
-                    console.error(error);
-                    reject(error);
-                  }
-                  resolve(results);
+              connection.query(`UPDATE ${tableName} SET count = ? WHERE id = ?`, [newCount, id], (error, results) => {
+                if (error) {
+                  console.error(error);
+                  reject(error);
                 }
-              );
+                resolve(results);
+              });
             });
           }
           return { queryResults, pageCount };
@@ -608,17 +558,13 @@ router.post(
             const newCount = (results.count || 0) + 1;
             const id = results[0].id;
             await new Promise((resolve, reject) => {
-              connection.query(
-                `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-                [newCount, id],
-                (error, results) => {
-                  if (error) {
-                    consoles.error(error);
-                    reject(error);
-                  }
-                  resolve();
+              connection.query(`UPDATE ${tableName} SET count = ? WHERE id = ?`, [newCount, id], (error, results) => {
+                if (error) {
+                  consoles.error(error);
+                  reject(error);
                 }
-              );
+                resolve();
+              });
             });
           } catch (error) {
             console.error(error);
@@ -647,8 +593,8 @@ router.post(
   (req, res, next) => {
     //選択忘れチェック
     const checkedId = req.body.check;
-    const tableName = req.body.subject;
-    const myselect = req.body.subject;
+    const tableName = req.body.tableName;
+    const myselect = req.body.tableName;
     const category = req.body.category;
     const tangen = req.body.tangen;
     const mymondo = req.body.mymondo;
@@ -658,6 +604,8 @@ router.post(
     const tangenerror = [];
     const checkerror = [];
     const errors = [];
+    console.log(req.body);
+    console.log(req.body.tangen);
     if (checkedId === void 0) {
       console.log("mkjbnjbkb");
       checkerror.push("印刷する問答を選択してください");
@@ -665,14 +613,14 @@ router.post(
     }
     if (errors.length > 0) {
       let Editor = req.session.username;
-
       if (mymondo === "on") {
-        Editor = "and editor = " + "'" + Editor + "'";
+        console.log("mymondo=on");
+        Editor = "and " + tableName + ".editor = " + "'" + Editor + "'";
       } else {
         Editor = "";
       }
       connection.query(
-        `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}sub.tangen = ? ${Editor}`,
+        `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.tangen = ? ${Editor}`,
         [req.body.tangen],
         (error, results) => {
           if (error) {
@@ -699,6 +647,7 @@ router.post(
             tableName: tableName,
             category: category,
             tangen: tangen,
+            mymondo: mymondo,
             subjecterror: subjecterror,
             categoryerror: categoryerror,
             tangenerror: tangenerror,
@@ -746,17 +695,13 @@ router.post(
           const newCount = (results[0].count || 0) + 1;
           const resultId = results[0].id;
           await new Promise((resolve, reject) => {
-            connection.query(
-              `UPDATE ${tableName} SET count = ? WHERE id = ?`,
-              [newCount, resultId],
-              (error, results) => {
-                if (error) {
-                  consoles.error(error);
-                  reject(error);
-                }
-                resolve();
+            connection.query(`UPDATE ${tableName} SET count = ? WHERE id = ?`, [newCount, resultId], (error, results) => {
+              if (error) {
+                consoles.error(error);
+                reject(error);
               }
-            );
+              resolve();
+            });
           });
         } catch (error) {
           console.error(error);

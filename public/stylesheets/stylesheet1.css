@@ -4,62 +4,69 @@
 
 * {
   box-sizing: border-box;
+  margin-bottom: 0;
 }
 @font-face {
+  /*全ページ*/
   font-family: "KleeOne-SemiBold";
   src: url("/fontfile/KleeOne-SemiBold.ttf") format("truetype");
   /* フォントファイルのパスはpublicディレクトリを基準として指定します */
 }
 
 body {
+  /*全ページ*/
   margin: 0;
   font-family: "KleeOne-SemiBold", sans-serif;
   font-size: 16px;
 }
-
 input,
 button,
 textarea,
-select {
+.selects {
+  /*全ページ*/
   font: inherit;
 }
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
+  /*オートフィル用*/
   box-shadow: 0 0 0 1000px #fcfcfd inset;
 }
-
 a {
+  /*全ページ*/
   font-size: 18px;
   text-decoration: none;
 }
-
 ul,
 li {
+  /*全ページ*/
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 .container {
+  /*ログイン、サインアップ、マイページ、ヘッダー、プリントフッター、新規作成、編集*/
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
 }
 img:hover {
+  /*トップ*/
   opacity: 0.7;
 }
 
 /*チェックボックス改善*/
 label,
 input[type="checkbox"] {
+  /*チェックボックスとラベルに指マーク*/
   cursor: pointer;
 }
 /*ボタン共通*/
 .btn {
+  /*科目ページ、マイページ、サインアップ、ログイン、トップ、新規作成、編集*/
   font-size: 24px;
-  padding: 8px 90px;
+  padding: 8px 0px;
   font-weight: bold;
   color: white;
   border: none;
@@ -71,14 +78,17 @@ input[type="checkbox"] {
   border-radius: 27px;
   display: block;
   margin: 40px auto 0;
+  text-align: center;
   box-shadow: 0px 7px #216e8a;
 }
 .btn:hover {
+  /*科目ページ、マイページ、サインアップ、ログイン、トップ、新規作成、編集*/
   opacity: 0.8;
   cursor: pointer;
   box-shadow: 0px 7px #216e8a;
 }
 .btn:active {
+  /*科目ページ、マイページ、サインアップ、ログイン、トップ、新規作成、編集*/
   box-shadow: none;
   position: relative;
   top: 7px;
@@ -86,10 +96,12 @@ input[type="checkbox"] {
 
 /*印刷ボタン*/
 .print {
+  /*科目ページ、マイページ*/
   margin: auto;
   margin-bottom: 30px;
 }
 .print input[type="submit"] {
+  /*科目ページ、マイページ*/
   font-size: 23px;
   padding: 0 90px;
   font-weight: bold;
@@ -101,6 +113,7 @@ input[type="checkbox"] {
 
 /*押しボタン中（右上）*/
 .btn-mid {
+  /*マイページ*/
   font-size: 24px;
   height: 48px;
   width: 60%;
@@ -110,46 +123,117 @@ input[type="checkbox"] {
   box-shadow: 0px 7px #3b967f;
 }
 .btn-mid:hover {
+  /*マイページ*/
   opacity: 0.8;
   cursor: pointer;
   box-shadow: 0px 7px #3b967f;
 }
 .btn-mid:active {
+  /*マイページ*/
   box-shadow: none;
   position: relative;
   top: 7px;
 }
 /*押しボタン小*/
 .btn-small {
+  /*マイページ*/
   width: auto;
   height: 40px;
   border: none;
   display: block;
   background-color: rgb(162, 162, 162);
-  box-shadow: 0px 5px rgb(67, 67, 67);
+  box-shadow: 0px 2px rgb(131, 131, 131);
 }
 .btn-small:hover {
+  /*マイページ*/
   opacity: 0.8;
   cursor: pointer;
-  box-shadow: 0px 7px rgb(75, 75, 75);
+  box-shadow: 0px 2spx rgb(131, 131, 131);
 }
 .btn-small:active {
+  /*マイページ*/
   box-shadow: none;
   position: relative;
-  top: 7px;
+  top: 2px;
+}
+.btn-circle {
+  /*マイページ*/
+  display: none;
+}
+#subject,
+#category,
+#tangen {
+  /*マイページ、新規作成*/
+  width: 100%; /* 幅 */
+  height: 30px; /* 高さ */
+  background-color: #fff; /* 背景色 */
+  border: none; /* ボーダーなし */
+  border-radius: 5px; /* 角丸 */
+  padding: 5px; /* 内側の余白 */
+  font-size: 14px; /* フォントサイズ */
+  border: 1px solid #d5dee8;
+}
+#subject,
+#category,
+#tangen option {
+  /*マイページ、新規作成*/
+  background-color: #fff; /* 背景色 */
+  color: #333; /* テキストの色 */
+  font-size: 14px; /* フォントサイズ */
+}
+.word #subject,
+.word #category,
+.word #tangen {
+  /*英語*/
+  width: 100%; /* 幅 */
+  height: 30px; /* 高さ */
+  background-color: #fff; /* 背景色 */
+  border: none; /* ボーダーなし */
+  border-radius: 5px; /* 角丸 */
+  padding: 5px; /* 内側の余白 */
+  font-size: 14px; /* フォントサイズ */
+  border: 1px solid #d5dee8;
+}
+.word #subject,
+.word #category,
+.word #tangen option {
+  /*英語*/
+  background-color: #fff; /* 背景色 */
+  color: #333; /* テキストの色 */
+  font-size: 14px; /* フォントサイズ */
+}
+#quecount {
+  /*マイページ*/
+  width: 70px; /* 幅 */
+  height: 30px; /* 高さ */
+  background-color: #fff; /* 背景色 */
+  border: none; /* ボーダーなし */
+  border-radius: 5px; /* 角丸 */
+  padding: 5px; /* 内側の余白 */
+  font-size: 14px; /* フォントサイズ */
+  border: 1px solid #d5dee8;
+}
+#quecount option {
+  /*マイページ*/
+  background-color: #fff; /* 背景色 */
+  color: #333; /* テキストの色 */
+  font-size: 14px; /* フォントサイズ */
 }
 /*黄色いベース部分*/
 .ctl {
+  /*新規作成、編集、科目ページ*/
   padding: 20px 40px;
   margin: auto;
   margin-top: 80px;
   width: 80%;
+  min-height: 450px;
   background-color: #fff8dc;
   box-shadow: 0 0 5px #fff, 0 0 5px #ccc, 0 0 1px #aaa;
   -webkit-box-shadow: 0 0 5px #fff, 0 0 5px #ccc, 0 0 1px #aaa;
   -moz-box-shadow: 0 0 5px #fff, 0 0 5px #ccc, 0 0 1px #aaa;
 }
 .ctl h2 {
+  /*新規作成、編集、科目ページ*/
   font-size: 18px;
   padding-left: 40px;
   padding-right: 40px;
@@ -157,6 +241,7 @@ input[type="checkbox"] {
   background-color: #c3dbf7;
 }
 .ctl h3 {
+  /*新規作成、編集、科目ページ*/
   font-size: 18px;
   margin-left: 50px;
   padding: 0px;
@@ -164,11 +249,13 @@ input[type="checkbox"] {
 
 /*フォームエリア*/
 form > p {
+  /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 15px;
 }
 form > a {
+  /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   display: block;
   width: 50%;
   text-align: left;
@@ -179,6 +266,7 @@ form > a {
 }
 input,
 textarea {
+  /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   width: 100%;
   padding: 16px 20px;
   line-height: 1.8;
@@ -191,49 +279,55 @@ textarea {
 }
 input:hover,
 textarea:hover {
+  /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   border-color: #b6c4d2;
   box-shadow: 0px 0px 12px 1px rgba(160, 195, 247, 0.2);
 }
 input:focus,
 textarea:focus {
+  /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   border-color: #b6c4d2;
 }
 textarea {
+  /*新規作成、編集、ログイン、サインアップ*/
   resize: vertical;
 }
-input[name="title"] {
-  margin-bottom: 30px;
-}
-textarea[name="summary"] {
-  margin-bottom: 30px;
-  height: calc(2em * 3 + 1em);
-  line-height: 2;
-}
-textarea[name="content"] {
-  padding: 24px 28px;
-  height: calc(2em * 15 + 1em);
-  line-height: 2;
-}
-
-.select {
+.selects2 {
+  /*新規作成*/
   display: flex;
   flex-wrap: wrap;
-  background-color: #5be7c4;
-  height: 110px;
+  background-color: #fff8dc;
+  height: auto;
 }
-.select p {
+.selects {
+  /*マイページ*/
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff8dc;
+  height: auto;
+}
+.selects p {
+  /*マイページ*/
   font-size: 18px;
   padding: 5px 0;
   margin: 0;
-  background-color: #80bcff;
+  /*background-color: #80bcff;*/
+}
+.selects h4 {
+  /*マイページ*/
+  font-size: 14px;
+  padding: 5px 0;
+  margin: 0;
+  /*background-color: #80bcff;*/
 }
 .pulldown {
-  flex: 1 1 200px; /* 各要素の幅を調整してください */
-  margin-right: 10px; /* 各要素の間隔を調整してください */
+  /*マイページ、新規作成、英語*/
+  flex: 1 1 30%; /* 各要素の幅を調整してください */
+  margin: 0 10px; /* 各要素の間隔を調整してください */
   float: left;
-  background-color: #7a57d1;
 }
 .pulldown input[type="submit"] {
+  /*マイページ、新規作成、英語*/
   font-weight: bold;
   color: white;
   font-size: 20px;
@@ -241,84 +335,100 @@ textarea[name="content"] {
   padding: 2px 5px 8px 8px;
   margin: 30px auto 0;
 }
+.pulldown-small p {
+  text-align: center;
+}
 .print {
+  /*科目ページ、国語プリント、数学プリント、*/
   flex: 0 0 auto;
 }
 .error-message {
+  /*マイページ、新規作成、編集*/
+  width: 100%;
   height: 20px;
   margin: 0;
   padding: 0;
   display: flex;
   font-size: 14px;
   color: red;
-  background-color: #80bcff;
 }
 /*印刷範囲選択（まるごと‐シャッフル）*/
 .printcount {
-  padding: 20px 10px;
+  /*英語*/
+  padding: 5px 10px;
+  margin-top: 5px;
   line-height: 40px;
 }
 .printcount input[type="radio"] {
+  /*英語*/
   width: 18px;
   margin-left: 80px;
 }
+
 /*・・・・・・登録、ログインページ・・・・・・*/
 
 .sign {
+  /*サインアップ、ログイン、新規作成*/
   display: flex;
   justify-content: center;
   min-height: 100vh;
 }
 .sign > .container {
-  width: 550px;
-  padding: 60px 0;
+  /*サインアップ、ログイン、新規作成*/
+  max-width: 550px;
+  padding: 0;
 }
 .sign > .container > p {
-  margin-top: 36px;
+  /*サインアップ、ログイン、新規作成*/
+  margin-top: 24px;
   font-weight: bold;
   font-size: 14px;
   text-align: center;
 }
 .sign > .container form {
+  /*サインアップ、ログイン、新規作成*/
   padding-top: 20px;
 }
 .sign h1 {
+  /*サインアップ、ログイン、新規作成*/
   text-align: center;
   font-size: 28px;
   margin-bottom: 50px;
 }
 .sign h2 {
+  /*サインアップ、ログイン、新規作成*/
   text-align: center;
   font-size: 24px;
 }
 .sign form > p {
+  /*サインアップ、ログイン、新規作成*/
   margin-bottom: 10px;
 }
 .sign input {
+  /*サインアップ、ログイン、新規作成*/
   padding: 10px 20px;
 }
 .sign input:-webkit-autofill {
+  /*サインアップ、ログイン、新規作成*/
   box-shadow: 0 0 0px 1000px #fff inset;
 }
-.sign input[name="username"] {
-  margin-bottom: 30px;
-}
-.sign input[name="email"] {
-  margin-bottom: 30px;
-}
+
 .sign input[type="submit"] {
-  font-size: 18px;
+  /*サインアップ、ログイン*/
+  font-size: 23px;
   font-weight: bold;
   height: 54px;
-  padding: 0 90px;
+  padding: 0 0px;
   border-radius: 27px;
   width: 60%;
   display: block;
   margin: 80px auto 0;
 }
 .signpanel {
+  /*サインアップ、ログイン*/
   padding: 20px 40px;
   margin: auto;
+  margin-bottom: 20px;
   margin-top: 80px;
   width: 95%;
   background-color: #fff8dc;
@@ -327,19 +437,23 @@ textarea[name="content"] {
   -moz-box-shadow: 0 0 5px #fff, 0 0 5px #ccc, 0 0 1px #aaa;
 }
 .signpanel ul {
+  /*サインアップ、ログイン*/
   color: red;
 }
 .signpanel a {
+  /*サインアップ、ログイン*/
   text-align: center;
   color: #2b546a;
 }
 .signpanel a:hover {
+  /*サインアップ、ログイン*/
   color: red;
 }
 
 /*・・・・・・・ヘッダーフッター・・・・・・*/
 /*ヘッダー*/
 header {
+  /*ヘッダー*/
   height: 65px;
   width: 100%;
   background-color: #50c1e9;
@@ -349,23 +463,27 @@ header {
 }
 /*ヘッダーロゴ*/
 .header-logo {
-  margin-left: 25px;
+  /*ヘッダー*/
+  margin-left: 10px;
   font-weight: bold;
   font-family: "OCRB";
   font-size: 50px;
-  line-height: 70px;
+  line-height: 75px;
   color: #7a45d1;
   float: left;
   text-shadow: 4px 4px 6px rgb(197, 197, 197);
   display: inline;
 }
 .header-logo:hover {
+  /*ヘッダー*/
   color: #9979ce;
 }
 .header-left {
+  /*ヘッダー*/
   float: left;
 }
 .header-left p {
+  /*ヘッダー*/
   padding-left: 25px;
   margin-top: 25px;
   float: right;
@@ -374,13 +492,14 @@ header {
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
 }
 .header-menu {
-  float: right;
+  /*ヘッダー*/
   margin-left: 25px;
   margin-right: -25px;
 }
 .header-menu a {
+  /*ヘッダー*/
   line-height: 65px;
-  padding: 0 25px;
+  padding: 0 15px;
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
@@ -389,16 +508,19 @@ header {
   transition: all 0.5s;
 }
 .header-menu a:hover {
+  /*ヘッダー*/
   background-color: rgba(255, 255, 255, 0.3);
 }
 /*メニューボタン*/
 .header-right {
+  /*ヘッダー*/
   float: right;
-  margin-right: -25px;
+  margin-right: 5px;
 }
 .header-right a {
+  /*ヘッダー*/
   line-height: 65px;
-  padding: 0 25px;
+  padding: 0 15px;
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
@@ -407,20 +529,25 @@ header {
   transition: all 0.5s;
 }
 .header-right a:hover {
+  /*ヘッダー*/
   background-color: rgba(255, 255, 255, 0.3);
+}
+#menu-items {
+  /*ヘッダー*/
+  display: none; /* 初期状態では非表示にする */
 }
 
 /*フッター*/
-footer img {
-  width: 125px;
-}
 footer p {
+  /*フッター、プリントフッター*/
   color: black;
   font-size: 12px;
 }
 footer {
-  padding-top: 30px;
-  bottom: 0;
+  /*フッター、プリントフッター*/
+  padding-top: 25px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
   background-color: #5be7c4;
 }
 
@@ -428,6 +555,7 @@ footer {
 
 /*・・・・・・トップページ・・・・・・*/
 .top-wrapper {
+  /**/
   padding: 180px 0 100px 0;
   background-image: url("/images/top.png");
   background-position: center;
@@ -439,6 +567,7 @@ footer {
   text-align: center;
 }
 .top-container {
+  /*トップ*/
   width: 50%;
   opacity: 0.9;
   background-color: #fff8dc;
@@ -446,315 +575,381 @@ footer {
   margin: auto;
 }
 .top-wrapper h1 {
+  /*トップ*/
   padding-top: 15px;
   font-size: 50px;
   letter-spacing: 5px;
 }
 .top-wrapper h2 {
+  /*トップ*/
   font-size: 36px;
   letter-spacing: 5px;
 }
 .top-wrapper p {
+  /*トップ*/
   padding-bottom: 10px;
 }
 
 /*教科ボタンエリア*/
 .subject-wrapper {
-  height: 500px;
-  padding-bottom: 80px;
+  /*トップ*/
+  height: 450px;
+  padding-bottom: 40px;
   background-color: #f7f7f7;
   text-align: center;
 }
 .heading {
-  padding-top: 60px;
+  /*トップ*/
+  padding-top: 10px;
   padding-bottom: 10px;
   color: #5f5d60;
   text-align: center;
 }
 .heading h2 {
+  /*トップ*/
   font-weight: normal;
 }
-.subject {
-  float: left;
-  width: 33%;
+.heading h3 {
+  /*トップ*/
+  font-weight: normal;
 }
-.subject2 {
-  float: left;
-  width: 33%;
+.subjects {
+  /*トップ*/
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1180px;
+}
+.subject {
+  /*トップ*/
+  flex: 1;
+  width: 30%;
+  margin: 0 10px;
+  align-items: center;
 }
 .subject-icon {
+  /*トップ*/
+  justify-content: center;
+  align-items: center;
   padding-top: 20px;
   position: relative;
 }
 .subject-icon p {
-  position: absolute;
-  top: 80px;
+  /*トップ*/
   width: 100%;
   color: rgb(11, 11, 11);
 }
 .txt-contents {
+  /*トップ*/
   width: 80%;
   display: inline-block;
   margin-top: 20px;
   font-size: 12px;
   color: #0c0c0c;
 }
-.heading h3 {
-  font-weight: normal;
-}
 
-/*メッセージエリア*/
+/*・・・・・メッセージエリア・・・・・*/
 .message-wrapper {
+  /*トップ*/
   border-bottom: 1px solid #eee;
   padding-bottom: 80px;
   text-align: center;
-}
-.message {
-  padding: 15px 30px;
-  font-size: 24px;
 }
 
 /*・・・・・・科目ページ・・・・・・*/
 /*選択パネル*/
 .quecount {
+  /*科目ページ*/
   padding: 0px 10px;
   line-height: 40px;
 }
 .quecount input[type="radio"] {
+  /*科目ページ*/
   width: 18px;
   margin-left: 80px;
-}
-.quecount .count {
-  padding: 0px 10px;
 }
 
-/*単元選択*/
 .choice {
+  /*科目ページの背景*/
   margin-bottom: 20px;
 }
-.tangen {
+.tangens {
+  /*科目ページ*/
   padding: 0px 10px;
   line-height: 40px;
 }
-.tangen input[type="checkbox"] {
+.tangens input[type="checkbox"] {
+  /*科目ページ*/
+  width: 18px;
+  margin-left: 5px;
+}
+.myquecount {
+  /*科目ページ*/
+  padding: 0px 10px;
+  line-height: 40px;
+}
+.myquecount input[type="radio"] {
+  /*科目ページ*/
   width: 18px;
   margin-left: 80px;
 }
-.tangen .write {
+.myquecount .count {
+  /*科目ページ*/
   padding: 0px 10px;
-  line-height: 40px;
+  width: 80px;
 }
-.tangen .read {
-  padding: 0px 10px;
-  line-height: 40px;
+
+.tangen {
+  /*科目*/
+  display: flex;
 }
-.math-tangen span {
+.tang {
+  /*科目*/
   font-size: 18px;
   font-weight: bold;
-  margin-left: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+  float: left;
+  width: 180px;
   padding: 0px;
+}
+.tan {
+  /*科目*/
+  height: auto;
+  width: 90%;
+}
+.tangen label {
+  /*科目*/
+  float: left;
+  width: 200px;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.word {
+  /*英語*/
+  display: block; /*英語のプルダウンをフレックスに表示するための親の責務*/
+}
+.word > .pulldown {
+  /*英語*/
+  width: 40%; /* 各要素の幅を調整してください */
+  float: none;
 }
 
 /*・・・・・・新規作成＆編集・・・・・・・*/
 
-.edit {
-  display: flex;
-  justify-content: center;
-}
-.edit > .container {
-  width: 70%;
-  padding: 60px 0;
-}
-.edit .ctl h2 {
-  text-align: center;
-  font-size: 24px;
-  width: auto;
-  background-color: rgba(0, 0, 0, 0);
-}
-.edit .pulldown {
-  width: 30%;
-}
-.edit a {
-  text-align: center;
-  color: #2b546a;
-}
-.edit a:hover {
-  color: red;
-}
 /*・・・・・・マイページ・・・・・・*/
 .container-header {
+  /*マイページ*/
   width: 100%;
   height: 90px;
   margin-top: 70px;
   margin-bottom: 10px;
-  background-color: #7a57d1;
+  /*background-color: #7a57d1;*/
   display: flex;
 }
-
 .container-header > h1 {
-  width: 15%;
+  /*マイページ*/
+  width: 25%;
+  padding: 0 10px;
   height: 10px;
-  margin: 5px;
+  text-shadow: 4px 4px 6px rgb(160, 160, 160);
 }
 .container-header .setumei {
-  width: 45%;
+  /*マイページ*/
+  width: 55%;
+  height: auto;
   background-color: pink;
   padding-top: 0;
 }
 .container-header .setumei > p {
+  /*マイページ*/
   padding-left: 20px;
   margin: 8px;
 }
 .container-header a {
+  /*マイページ*/
   padding: 5px;
   text-align: center;
   margin-right: 10px;
   margin-top: 20px;
 }
 .container-header > .new {
-  width: 40%;
-  text-align: right;
+  /*マイページ*/
+  width: 30%;
+  margin-left: auto;
+  margin-right: 0;
   padding-right: 10px;
-  background-color: #ff7f8c;
 }
+
 .index-table-wrapper {
+  /*マイページ*/
   overflow: auto; /* スクロールバーを表示 */
   max-width: 100%; /* コンテナの最大幅を設定 */
 }
 .table-head {
+  /*マイページ*/
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background-color: #b7cadc;
   border-radius: 2px 2px 0 0;
   height: 46px;
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 46px;
   color: #ffffff;
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
 }
-
 .checkbox-container {
+  /*マイページ*/
   width: 10%;
   text-align: center;
-  font-size: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.checkbox-container label {
+  /*マイページ*/
+  margin: 0px;
+  /*  background-color: #3b967f;*/
+  line-height: 14px;
 }
 .id-column {
+  /*マイページ*/
+  margin-left: 5px;
   width: 5%;
   text-align: center;
-  background-color: #7a45d1;
-}
-.textcategory-column {
-  width: 10%;
-  text-align: center;
-  background-color: bisque;
-}
-.tangen-column {
-  width: 10%;
-  text-align: center;
-  background-color: #80bcff;
+  /*background-color: #7a45d1;*/
 }
 .question-column {
+  /*マイページ*/
+  margin-left: 5px;
   width: 20%;
   text-align: left;
   padding-left: 10px;
-  background-color: chartreuse;
+  /*background-color: chartreuse;*/
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; /* IE, Edge 対応 */
+  scrollbar-width: none; /* Firefox 対応 */
 }
 .answer-column {
+  /*マイページ*/
+  margin-left: 5px;
   width: 20%;
-  text-align: center;
-  background-color: cyan;
-}
-.grade-column {
-  width: 72px;
-  text-align: center;
+  text-align: left;
+  /*background-color: cyan;*/
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; /* IE, Edge 対応 */
+  scrollbar-width: none; /* Firefox 対応 */
 }
 .date-column {
-  width: 72px;
+  /*マイページ*/
+  margin-left: 5px;
+  width: 10%;
   text-align: center;
-  background-color: #7a57d1;
+  /*background-color: #7a57d1;*/
 }
 .editor-column {
-  width: 72px;
+  /*マイページ*/
+  margin-left: 5px;
+  width: 10%;
   text-align: center;
-  background-color: cornflowerblue;
+  /*background-color: cornflowerblue;*/
 }
 .table-body {
+  /*マイページ*/
   width: 100%;
-  height: 600px;
+  height: 400px;
   background-color: #ffffff;
 }
 .table-body li {
+  /*マイページ*/
   height: 50px;
   border: 1px solid #f0f4f9;
   border-top: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #8491a5;
+  /*background-color: #8491a5;*/
 }
 .table-body .checkbox {
+  /*マイページ*/
   font-size: 16px;
-  color: #bac6d3;
-}
-.table-body .check-list {
-  font-size: 16px;
-  color: #bac6d3;
+  color: #575c61;
 }
 .table-body .id-column {
+  /*マイページ*/
   font-size: 16px;
-  color: #bac6d3;
+  color: #575c61;
 }
 .table-body .textcategory-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
+  color: #575c61;
 }
 .table-body .tangen-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
+  color: #575c61;
 }
 .table-body .question-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
+  color: #575c61;
   text-align: left;
 }
 .table-body .answer-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
-}
-.table-body .grade-column {
-  font-size: 14px;
-  font-weight: 500;
-  color: #8491a5;
+  color: #575c61;
 }
 .table-body .date-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
+  color: #5e7290;
 }
 .table-body .editor-column {
+  /*マイページ*/
   font-size: 14px;
   font-weight: 500;
-  color: #8491a5;
+  color: #575c61;
 }
-.user-data {
+.table-data {
+  /*マイページ*/
   display: flex;
   width: 100%;
-  background-color: deeppink;
+  /*background-color: deeppink;*/
 }
 .list-menu {
+  /*マイページ*/
   display: flex;
+  margin-left: auto;
+  margin-right: 5px;
+  /*background-color: #50c1e9;*/
 }
 .list-menu form {
+  /*マイページ*/
   width: 60px;
   text-align: center;
 }
 .list-menu form input {
+  /*マイページ*/
   font-size: 16px;
-  color: #bac6d3;
+  color: #698d82;
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -765,23 +960,29 @@ footer {
   background: transparent;
 }
 .list-menu form input:hover {
+  /*マイページ*/
   color: #ff7f8c;
   transition: all 0.3s ease;
 }
 .list-menu a {
+  /*マイページ*/
   width: 60px;
   font-size: 16px;
   color: #bac6d3;
   text-align: center;
 }
 .list-menu a:hover {
+  /*マイページ*/
   color: #80bcff;
 }
+
 /*・・・・・・・・・ルビ・・・・・・・・・*/
 ruby[data-ruby] {
+  /*国語プリント*/
   position: relative;
 }
 ruby[data-ruby]::before {
+  /*国語プリント*/
   content: attr(data-ruby);
   position: absolute;
   left: -2em;
@@ -791,48 +992,342 @@ ruby[data-ruby]::before {
   font-size: 0.5em;
   color: black;
 }
-.jpn-mondo {
-  font-size: 18px;
-  writing-mode: vertical-rl;
-}
-.jpn-mondo .mon {
-  border: solid 1px #454545;
-  color: lightgray;
-}
 
-/**/
-@media all and (max-width: 750px) {
-  .top-wrapper h1 {
-    font-size: 32px;
-  }
+/*・・・・・タブレットなどの中型ディスプレイのときのみ有効なスタイル・・・・・*/
 
-  .heading h2 {
-    font-size: 20px;
-  }
-}
-
-@media all and (max-width: 670px) {
+@media all and (max-width: 980px) {
   .header-right {
+    /*ヘッダー*/
     display: none;
   }
+  .header-menu {
+    /*ヘッダー*/
+    display: none;
+  }
+  #menu-wrapper {
+    /*ヘッダー*/
+    position: relative; /* 相対的な位置指定のための親要素 */
+    float: right;
+    padding: 0;
+  }
+  #menu-icon:hover {
+    /*ヘッダー*/
+    opacity: 0.7;
+    cursor: pointer;
+  }
+  #menu-icon {
+    /*ヘッダー*/
+    width: 60px;
+    height: 60px;
+    padding-left: 9px;
+    margin-top: 2px;
+    margin-right: 0;
+    border-radius: 8px;
+    position: relative;
+    background-color: #50c1e9;
+    float: right;
+    cursor: pointer;
+  }
+  #menu-icon:before,
+  #menu-icon:after,
+  #menu-icon span {
+    /*ヘッダー*/
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 4px;
+    background-color: #7a45d1;
+    box-shadow: 0px 1px 0px 1px #6523cf;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+  #menu-icon span {
+    /*ヘッダー*/
+    top: 50%;
+    margin-top: -2px;
+  }
+  #menu-icon:before {
+    /*ヘッダー*/
+    top: 18px;
+  }
+  #menu-icon:after {
+    /*ヘッダー*/
+    top: 38px;
+  }
+  #menu-items {
+    /*ヘッダー*/
+    display: none; /* 初期状態では非表示にする */
+    margin-right: 0;
+    background-color: #50c1e9;
+    position: absolute;
+    top: 100%; /* メニューアイコンの下に配置する */
+    right: 0; /* 右寄せ */
+    float: right;
+    text-align: center;
+    height: auto;
+    width: 400%;
+  }
+  #menu-items a {
+    /*ヘッダー*/
+    font-size: 24px;
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgb(63, 63, 63);
+    display: block;
+    transition: all 0.5s;
+    box-shadow: 0px -2px 0px rgba(144, 144, 144, 0.2);
+  }
 
-  .menu-icon {
+  .container-header {
+    /*マイページ*/
+    width: 100%;
+    height: 110px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    /*background-color: #7a57d1;*/
     display: block;
   }
 
-  .top-wrapper .btn {
+  .container-header > h1 {
+    /*マイページ*/
     width: 100%;
+    text-align: center;
+    height: 35px;
+    margin: 5px;
   }
-
-  .top-wrapper {
+  .container-header .setumei {
+    /*マイページ*/
+    width: 100%;
+    height: auto;
+    background-color: pink;
+    text-align: center;
+    padding-top: 0;
+    margin-top: 20px;
+  }
+  .container-header .setumei > p {
+    /*マイページ*/
+    font-size: 14px;
+    padding-left: 10px;
+    margin: 8px;
+  }
+  .container-header a {
+    /*マイページ*/
+    padding: 5px;
+    text-align: center;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+  .container-header > .new {
+    /*マイページ*/
+    width: 30px;
+    text-align: right;
+    padding-right: 10px;
+    float: right;
+    display: none;
+  }
+  .new-small {
+    /*マイページ*/
+    position: fixed;
+    top: 80px;
+    right: 0;
+    z-index: 1;
+  }
+  .btn-circle {
+    /*マイページ*/
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    border-radius: 32px;
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5be7c4;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 1px 0 1px rgba(133, 133, 133, 0.3); /* 2つ目の値を調整してぼかしの効果を調整 */
+  }
+  .btn-circle:hover {
+    /*マイページ*/
+    opacity: 0.9;
+    cursor: pointer;
+  }
+  .ctl {
+    padding: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    width: 95%;
+  }
+  .selects {
+    /*マイページ*/
+    display: block;
+    height: 350px;
+  }
+  .selects2 {
+    /*マイページ*/
+    display: block;
+    height: auto;
+  }
+  .pulldown {
+    /*マイページ、新規作成、英語*/
+    flex: 1 1 100%; /* 幅を100%に設定 */
+    margin: 0 5px; /* 各要素の間隔を調整してください */
+    float: none;
+    /*background-color: #7a57d1;*/
+  }
+  .pulldown-small {
+    /*マイページ*/
+    width: 22%;
+    height: 30px;
+    float: left;
     text-align: center;
   }
 
+  #subject,
+  #category,
+  #tangen {
+    /*マイページ*/
+    width: 100%; /* 幅 */
+    height: 30px; /* 高さ */
+    padding: 0px; /* 内側の余白 */
+    font-size: 14px; /* フォントサイズ */
+  }
+  #subject,
+  #category,
+  #tangen option {
+    /*マイページ*/
+    color: #333; /* テキストの色 */
+    font-size: 14px; /* フォントサイズ */
+  }
+  #quecount {
+    /*科目ページ、マイページ*/
+    width: 100%; /* 幅 */
+    height: 30px; /* 高さ */
+    padding: 0px; /* 内側の余白 */
+    font-size: 14px; /* フォントサイズ */
+  }
+  #quecount option {
+    /*マイページ*/
+    background-color: #fff; /* 背景色 */
+    color: #333; /* テキストの色 */
+    font-size: 14px; /* フォントサイズ */
+  }
+  .quecount {
+    /*科目ページ*/
+    padding: 0px 5px;
+    line-height: 40px;
+  }
+  .quecount input[type="radio"] {
+    /*科目ページ*/
+    width: 18px;
+    margin-left: 20px;
+  }
+  .word {
+    /*英語*/
+    display: block;
+  }
+  .word > .pulldown {
+    /*英語*/
+    width: 100%; /* 各要素の幅を調整してください */
+  }
+  .top-wrapper {
+    /*トップ*/
+    padding: 50px 0;
+  }
   .top-wrapper h1 {
+    /*トップ*/
+    font-size: 32px;
+  }
+  .top-wrapper h2 {
+    /*トップ*/
+    font-size: 28px;
+  }
+  .top-container {
+    /*トップ*/
+    width: 100%;
+  }
+  .heading h2 {
+    /*トップ*/
+    font-size: 20px;
+  }
+  img {
+    /*トップ*/
+    width: 80%; /* 現在のサイズの50%に縮小 */
+  }
+  /*データテーブル*/
+  .table-head {
+    /*マイページ*/
+    font-size: 14px;
+    display: flex;
+    width: 1000px;
+  }
+  .table-data {
+    /*マイページ*/
+    display: flex;
+    width: 1000px;
+  }
+  .table-body li {
+    /*マイページ*/
+    display: flex;
+    width: 1000px;
+  }
+  .checkbox-container {
+    /*マイページ*/
+    width: 50px;
+  }
+  .id-column {
+    /*マイページ*/
+    width: 40px;
+  }
+  .question-column {
+    /*マイページ*/
+    width: 250px;
+  }
+  .answer-column {
+    /*マイページ*/
+    width: 250px;
+  }
+  .date-column {
+    /*マイページ*/
+    width: 70px;
+  }
+  .editor-column {
+    /*マイページ*/
+    width: 70px;
+  }
+}
+@media all and (max-width: 650px) {
+  .menu-icon {
+    /*ヘッダー*/
+    display: block;
+  }
+  .top-wrapper .btn {
+    /*トップ*/
+    width: 100%;
+  }
+  .top-wrapper {
+    /*トップ*/
+    text-align: center;
+  }
+  .top-wrapper h1 {
+    /*トップ*/
     font-size: 24px;
   }
-
   .top-wrapper p {
+    /*トップ*/
     font-size: 14px;
+  }
+  .container-header .setumei {
+    /*マイページ*/
+    text-align: left;
+  }
+  .container-header .setumei > p {
+    /*マイページ*/
+    font-size: 12px;
   }
 }

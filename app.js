@@ -106,7 +106,6 @@ app.get("/signup", (req, res) => {
 app.post(
   "/signup",
   (req, res, next) => {
-    console.log("入力値の空チェック");
     const username = req.body.username;
     const school = req.body.school;
     const email = req.body.email;
@@ -115,7 +114,7 @@ app.post(
     if (username === "") {
       errors.push("ユーザー名が空です");
     }
-    if (school == "") {
+    if (school === "") {
       errors.push("塾名が空です");
     }
     if (email === "") {
@@ -124,11 +123,9 @@ app.post(
     if (password === "") {
       errors.push("パスワードが空です");
     }
-
     console.log(errors);
-
     if (errors.length > 0) {
-      res.render("signup.ejs", { errors: errors });
+      res.render("signup.ejs", { errors: errors, username: username, school: school, email: email, password: password });
     } else {
       next();
     }
@@ -178,7 +175,7 @@ app.post(
     //ハッシュ化
     bcrypt.hash(password, 10, (error, hash) => {
       connection.query(
-        "INSERT INTO users (username,school,email, password) VALUES (?, ?, ?, ?)",
+        "INSERT INTO users (username,school,email, password,date) VALUES (?, ?, ?, ?,now())",
         [username, school, email, hash],
         (error, results) => {
           req.session.userId = results.insertId;
@@ -219,6 +216,7 @@ app.post("/login", (req, res) => {
           res.render("login.ejs", {
             errors: errors,
             email: email,
+            focusInput: true,
           });
         }
       });

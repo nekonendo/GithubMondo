@@ -5,11 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon-Do</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="stylesheets/stylesheet1.css" />
+    <script src="/javascripts/header.js"></script>
   </head>
 
   <!--ボディ-->
@@ -27,7 +25,7 @@
             <p>メールアドレス</p>
             <input type="text" name="email" value="<%= email %>" />
             <p>パスワード</p>
-            <input type="password" name="password" />
+            <input type="password" name="password" id="password" />
             <% if (errors.length > 0) { %>
             <ul class="errors">
               <% errors.forEach(error => { %>

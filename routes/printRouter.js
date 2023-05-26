@@ -52,7 +52,6 @@ router.post("/math", async (req, res) => {
     console.log("tangen = null");
     tangen = ["m1000", "m1400", "m1800", "m2200"];
   }
-  console.log(tangen);
   const length = tangen.length;
   for (let i = 0; i < length; i++) {
     //tangenの個数分繰り返す
@@ -63,8 +62,6 @@ router.post("/math", async (req, res) => {
   }
   tangen.sort(() => Math.random() - 0.5); //tangenをランダムに並べる
   tangen.splice(15, tangen.length - 15); //余分なtangenを切り捨て
-  console.log(tangen);
-
   async function getQueryResults(tangen, tableName) {
     let queryResults = [];
 
@@ -82,7 +79,6 @@ router.post("/math", async (req, res) => {
                 reject(error);
               }
               resolve(results);
-              console.log(results[0].id);
             }
           );
         });
@@ -90,8 +86,6 @@ router.post("/math", async (req, res) => {
         const newCount = (results.count || 0) + 1;
         const id = results[0].id;
         await new Promise((resolve, reject) => {
-          console.log(newCount);
-          console.log(id);
           connection.query(
             `UPDATE ${tableName} SET count = ? WHERE id = ?`, //表示したらcountを1アップ
             [newCount, id],
@@ -113,9 +107,7 @@ router.post("/math", async (req, res) => {
     return queryResults;
   }
   const queryResults = await getQueryResults(tangen, tableName); // 1. getQueryResults関数の呼び出しを非同期に行う
-  console.log(queryResults);
   const mathprint = req.body;
-  console.log(mathprint);
   const begin = "\\begin{aligned} &\\quad "; //接頭句
   const br = "\\\\\\\\[12pt] &\\quad "; //改行
   const end = " \\end{aligned}"; //接尾句
@@ -215,7 +207,6 @@ router.post("/math", async (req, res) => {
       text15 +
       br +
       end;
-    console.log(que);
     texString1 = que;
     const ans =
       begin +
@@ -265,7 +256,6 @@ router.post("/math", async (req, res) => {
       ans15 +
       br +
       end;
-    console.log(ans);
     texString2 = ans;
   } else if (quecount == 10) {
     const que =
@@ -304,7 +294,6 @@ router.post("/math", async (req, res) => {
       br +
       end;
 
-    console.log(que);
     texString1 = que;
     const ans =
       begin +
@@ -341,18 +330,14 @@ router.post("/math", async (req, res) => {
       br +
       br +
       end;
-
-    console.log(ans);
     texString2 = ans;
   } else if (quecount == 5) {
     const que =
       begin + no1 + text1 + br + no2 + text2 + br + no3 + text3 + br + no4 + text4 + br + no5 + text5 + br + br + br + br + br + br + br + br + end;
-    console.log(que);
     texString1 = que;
     const ans =
       begin + no1 + ans1 + br + no2 + ans2 + br + no3 + ans3 + br + no4 + ans4 + br + no5 + ans5 + br + br + br + br + br + br + br + br + end;
 
-    console.log(ans);
     texString2 = ans;
   }
   mjAPI.typeset(
@@ -401,7 +386,6 @@ router.post(
     const categoryerror = [];
     const tangenerror = [];
     const errors = [];
-    console.log(req.body);
     if (category === "1" || category === "") {
       categoryerror.push("区分を選択してください");
       errors.push("cateerror");
@@ -453,7 +437,6 @@ router.post(
         tangen = ["wkanji1", "wkanji2", "wkanji3", "wkanji4"];
       }
     }
-    console.log(tangen);
     //ここからまるごと
     if (printrange === "printall") {
       async function getQueryResults(tangen, tableName) {
@@ -591,10 +574,18 @@ router.post(
 router.post(
   "/check",
   (req, res, next) => {
+    const username = req.session.username;
+    if (username === void 0) {
+      console.log("Not User");
+      res.redirect("/login");
+    } else {
+      next();
+    }
+  },
+  (req, res, next) => {
     //選択忘れチェック
-    const checkedId = req.body.check;
-    const tableName = req.body.tableName;
-    const myselect = req.body.tableName;
+    const tableName = req.body.subject;
+    const myselect = req.body.subject;
     const category = req.body.category;
     const tangen = req.body.tangen;
     const mymondo = req.body.mymondo;
@@ -604,58 +595,100 @@ router.post(
     const tangenerror = [];
     const checkerror = [];
     const errors = [];
-    console.log(req.body);
-    console.log(req.body.tangen);
-    if (checkedId === void 0) {
-      console.log("mkjbnjbkb");
-      checkerror.push("印刷する問答を選択してください");
+    if (tableName === "") {
+      subjecterror.push("科目を選択してください");
       errors.push("suberror");
     }
+    if (category === "1" || category === "") {
+      categoryerror.push("区分を選択してください");
+      errors.push("cateerror");
+    }
+    if (tangen === "1" || tangen === "") {
+      tangenerror.push("単元を選択してください");
+      errors.push("tanerror");
+    }
     if (errors.length > 0) {
-      let Editor = req.session.username;
-      if (mymondo === "on") {
-        console.log("mymondo=on");
-        Editor = "and " + tableName + ".editor = " + "'" + Editor + "'";
-      } else {
-        Editor = "";
-      }
-      connection.query(
-        `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.tangen = ? ${Editor}`,
-        [req.body.tangen],
-        (error, results) => {
-          if (error) {
-            console.error(error);
-            res.status(500).send("エラーが発生しました。");
-            return;
-          }
-          results.forEach((list) => {
-            if (list.date === null) {
-              list.date = "****";
-            } else {
-              //日付表示フォーマット
-              const date2 = list.date;
-              const y = date2.getFullYear();
-              const m = date2.getMonth() + 1;
-              const d = date2.getDate();
-              const date3 = y + "/" + m + "/" + d;
-              list.date = date3;
-            }
-          });
-
-          res.render("mypage.ejs", {
-            lists: results,
-            tableName: tableName,
-            category: category,
-            tangen: tangen,
-            mymondo: mymondo,
-            subjecterror: subjecterror,
-            categoryerror: categoryerror,
-            tangenerror: tangenerror,
-            checkerror: checkerror,
-            myselect: myselect,
-          });
+      res.render("mypage.ejs", {
+        lists: lists,
+        tableName: tableName,
+        category: category,
+        tangen: tangen,
+        mymondo: mymondo,
+        subjecterror: subjecterror,
+        categoryerror: categoryerror,
+        tangenerror: tangenerror,
+        checkerror: checkerror,
+        myselect: myselect,
+      });
+    } else {
+      next();
+    }
+  },
+  (req, res, next) => {
+    //選択忘れチェック
+    const checkedId = req.body.check;
+    let tableName = req.body.subject;
+    const myselect = req.body.subject;
+    let category = req.body.category;
+    let tangen = req.body.tangen;
+    const mymondo = req.body.mymondo;
+    let lists = [];
+    const subjecterror = [];
+    const categoryerror = [];
+    const tangenerror = [];
+    const checkerror = [];
+    const errors = [];
+    if (checkedId === void 0) {
+      console.log("印刷エラー");
+      checkerror.push("問答を選択してください");
+      errors.push("suberror");
+      if (errors.length > 0) {
+        let Editor = req.session.username;
+        console.log(Editor);
+        if (mymondo === "on") {
+          console.log("mymondo=on");
+          Editor = "and " + tableName + ".editor = " + "'" + Editor + "'";
+        } else {
+          Editor = "";
         }
-      );
+        connection.query(
+          `SELECT * FROM ${tableName}sub JOIN ${tableName} ON ${tableName}sub.tangen = ${tableName}.tangen WHERE ${tableName}.tangen = ? ${Editor}`,
+          [req.body.tangen],
+          (error, results) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send("エラーが発生しました。");
+              return;
+            }
+            results.forEach((list) => {
+              if (list.date === null) {
+                list.date = "****";
+              } else {
+                //日付表示フォーマット
+                const date2 = list.date;
+                const y = date2.getFullYear();
+                const m = date2.getMonth() + 1;
+                const d = date2.getDate();
+                const date3 = y + "/" + m + "/" + d;
+                list.date = date3;
+              }
+            });
+            lists = results;
+            res.render("mypage.ejs", {
+              lists: lists,
+              tableName: tableName,
+              category: category,
+              tangen: tangen,
+              mymondo: mymondo,
+              subjecterror: subjecterror,
+              categoryerror: categoryerror,
+              tangenerror: tangenerror,
+              checkerror: checkerror,
+              myselect: myselect,
+            });
+          }
+        );
+      }
     } else {
       next();
     }
@@ -663,18 +696,28 @@ router.post(
 
   async (req, res) => {
     const body = req.body;
-    console.log(body);
     const checkedId = req.body.check;
-    console.log(checkedId);
     const tableName = req.body.subject;
     const tangen = req.body.tangen;
     const dataCount = checkedId.length;
-    const quecount = req.body.quecount;
+    console.log(dataCount);
+    const quecount = req.body.myquecount;
+    console.log(quecount);
     const pageCount = Math.ceil(dataCount / quecount);
-    console.log("innsatusimasu");
-
+    console.log(pageCount);
     async function getQueryResults(checkedId, tableName) {
       let queryResults = [];
+      if (tangen && Array.isArray(checkedId)) {
+        checkedId.forEach((id) => {
+          console.log("checkedId is array");
+        });
+      } else if (typeof checkedId === "string") {
+        //選択が１つだった場合オブジェクトを配列にする
+        checkedId = [checkedId];
+        checkedId.forEach((id) => {
+          console.log("checkedId is string");
+        });
+      }
       for (let i = 0; i < checkedId.length; i++) {
         const id = checkedId[i];
         try {
@@ -687,10 +730,12 @@ router.post(
                   console.error(error);
                   reject(error);
                 }
+                console.log("SELECT query OK");
                 resolve(results);
               }
             );
           });
+          console.log(results);
           queryResults.push(results);
           const newCount = (results[0].count || 0) + 1;
           const resultId = results[0].id;
@@ -709,19 +754,22 @@ router.post(
           return;
         }
       }
+      console.log("UPDATE query OK");
       return queryResults;
     }
     let queryResults = await getQueryResults(checkedId, tableName);
-    console.log(queryResults);
     queryResults = queryResults.flat();
     console.log(queryResults);
     console.log(pageCount);
     console.log(quecount);
     console.log(tangen);
     console.log(tableName);
+
     if (tableName === "japanese") {
+      console.log("jpnPrint");
       res.render("jpnPrint", { queryResults, pageCount, quecount, tangen, tableName });
     } else {
+      console.log("otherPrint");
       res.render("otherPrint", { queryResults, pageCount, quecount, tangen, tableName });
     }
   }

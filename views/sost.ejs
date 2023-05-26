@@ -7,6 +7,7 @@
     <title>Mon-Do</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="stylesheets/stylesheet1.css" />
+    <script src="/javascripts/header.js"></script>
   </head>
 
   <!--ボディ-->
@@ -25,54 +26,65 @@
               <label for="15"><input type="radio" name="quecount" value="15" id="15" checked />15問</label>
             </div>
           </div>
-          <div class="tangen">
+          <div class="tangens">
             <h2>出題範囲を選択してください</h2>
-            <div class="rekishi">
-              <h3>歴史</h3>
-              <label for="jomon"><input type="checkbox" name="tangen" value="jomon" id="jomon" />縄文時代　　</label>
-              <label for="yayoi"><input type="checkbox" name="tangen" value="yayoi" id="yayoi" />弥生時代　　</label>
-              <label for="kohun"><input type="checkbox" name="tangen" value="kohun" id="kohun" />古墳時代　　</label>
-              <label for="asuka"><input type="checkbox" name="tangen" value="asuka" id="asuka" />飛鳥時代　　</label>
-              <label for="nara"><input type="checkbox" name="tangen" value="nara" id="nara" />奈良時代　　</label><br />
-              <label for="heian"><input type="checkbox" name="tangen" value="heian" id="heian" />平安時代　　</label>
-              <label for="kamakura"><input type="checkbox" name="tangen" value="kamakura" id="kamakura" />鎌倉時代　　</label>
-              <label for="nanboku"><input type="checkbox" name="tangen" value="nanboku" id="nanboku" />南北朝時代　</label>
-              <label for="muromati"><input type="checkbox" name="tangen" value="muromati" id="muromati" />室町時代　　</label>
-              <label for="aduti"><input type="checkbox" name="tangen" value="aduti" id="aduti" />安土桃山時代</label><br />
-              <label for="edo"><input type="checkbox" name="tangen" value="edo" id="edo" />江戸時代　　</label>
-              <label for="meiji"><input type="checkbox" name="tangen" value="meiji" id="meiji" />明治時代　　</label>
-              <label for="taisyo"><input type="checkbox" name="tangen" value="taisyo" id="taisyo" />大正時代　　</label>
-              <label for="syowa"><input type="checkbox" name="tangen" value="syowa" id="syowa" />昭和時代　　</label>
-              <label for="heisei"><input type="checkbox" name="tangen" value="heisei" id="heisei" />平成時代</label><br />
+            <div class="tangen">
+              <div class="tang">歴史</div>
+              <div class="tan">
+                <label for="jomon"><input type="checkbox" name="tangen" value="jomon" id="jomon" />縄文時代　　</label>
+                <label for="yayoi"><input type="checkbox" name="tangen" value="yayoi" id="yayoi" />弥生時代　　</label>
+                <label for="kohun"><input type="checkbox" name="tangen" value="kohun" id="kohun" />古墳時代　　</label>
+                <label for="asuka"><input type="checkbox" name="tangen" value="asuka" id="asuka" />飛鳥時代　　</label>
+
+                <label for="nara"><input type="checkbox" name="tangen" value="nara" id="nara" />奈良時代</label>
+                <label for="heian"><input type="checkbox" name="tangen" value="heian" id="heian" />平安時代</label>
+                <label for="kamakura"><input type="checkbox" name="tangen" value="kamakura" id="kamakura" />鎌倉時代</label>
+                <label for="nanboku"><input type="checkbox" name="tangen" value="nanboku" id="nanboku" />南北朝時代</label>
+
+                <label for="muromati"><input type="checkbox" name="tangen" value="muromati" id="muromati" />室町時代</label>
+                <label for="aduti"><input type="checkbox" name="tangen" value="aduti" id="aduti" />安土桃山時代</label>
+                <label for="edo"><input type="checkbox" name="tangen" value="edo" id="edo" />江戸時代</label>
+                <label for="meiji"><input type="checkbox" name="tangen" value="meiji" id="meiji" />明治時代</label>
+
+                <label for="taisyo"><input type="checkbox" name="tangen" value="taisyo" id="taisyo" />大正時代　　</label>
+                <label for="syowa"><input type="checkbox" name="tangen" value="syowa" id="syowa" />昭和時代　　</label>
+                <label for="heisei"><input type="checkbox" name="tangen" value="heisei" id="heisei" />平成時代</label>
+              </div>
             </div>
-            <div class="chiri">
-              <h3>地理</h3>
-              <label for="geoworld"><input type="checkbox" name="tangen" value="geoworld" id="geoworld" />世界の姿　　</label>
-              <label for="geoasia"><input type="checkbox" name="tangen" value="geoasia" id="geoasia" />アジア州　　</label>
-              <label for="geoeuropa"><input type="checkbox" name="tangen" value="geoeuropa" id="geoeuropa" />ヨーロッパ州</label>
-              <label for="geoafrica"><input type="checkbox" name="tangen" value="geoafrica" id="geoafrica" />アフリカ州　</label><br />
-              <label for="geonorthamerica"><input type="checkbox" name="tangen" value="geonorthamerica" id="geonorthamerica" />北アメリカ州</label>
-              <label for="geosouthamerica"><input type="checkbox" name="tangen" value="geosouthamerica" id="geosouthamerica" />南アメリカ州</label>
-              <label for="geooceania"><input type="checkbox" name="tangen" value="geooceania" id="geooceania" />オセアニア州</label><br />
-              <label for="geojapan"><input type="checkbox" name="tangen" value="geojapan" id="geojapan" />日本の姿　　</label>
-              <label for="geokyusyu"><input type="checkbox" name="tangen" value="geokyusyu" id="geokyusyu" />九州地方　　</label>
-              <label for="geochugokushikoku"
-                ><input type="checkbox" name="tangen" value="geochugokushikoku" id="geochugokushikoku" />中国四国地方</label
-              >
-              <label for="geokinki"><input type="checkbox" name="tangen" value="geokinki" id="geokinki" />近畿地方　　</label><br />
-              <label for="geochubu"><input type="checkbox" name="tangen" value="geochubu" id="geochubu" />中部地方　　</label>
-              <label for="geokanto"><input type="checkbox" name="tangen" value="geokanto" id="geokanto" />関東地方　　</label>
-              <label for="geotohoku"><input type="checkbox" name="tangen" value="geotohoku" id="geotohoku" />東北地方　　</label>
-              <label for="geohokkaido"><input type="checkbox" name="tangen" value="geohokkaido" id="geohokkaido" />北海道地方　</label><br />
+            <div class="tangen">
+              <div class="tang">地理</div>
+              <div class="tan">
+                <label for="geoworld"><input type="checkbox" name="tangen" value="geoworld" id="geoworld" />世界の姿　　</label>
+                <label for="geoasia"><input type="checkbox" name="tangen" value="geoasia" id="geoasia" />アジア州　　</label>
+                <label for="geoeuropa"><input type="checkbox" name="tangen" value="geoeuropa" id="geoeuropa" />ヨーロッパ州</label>
+                <label for="geoafrica"><input type="checkbox" name="tangen" value="geoafrica" id="geoafrica" />アフリカ州　</label>
+
+                <label for="geonorthamerica"><input type="checkbox" name="tangen" value="geonorthamerica" id="geonorthamerica" />北アメリカ州</label>
+                <label for="geosouthamerica"><input type="checkbox" name="tangen" value="geosouthamerica" id="geosouthamerica" />南アメリカ州</label>
+                <label for="geooceania"><input type="checkbox" name="tangen" value="geooceania" id="geooceania" />オセアニア州</label>
+
+                <label for="geojapan"><input type="checkbox" name="tangen" value="geojapan" id="geojapan" />日本の姿</label>
+                <label for="geokyusyu"><input type="checkbox" name="tangen" value="geokyusyu" id="geokyusyu" />九州地方</label>
+                <label for="geochugokushikoku"
+                  ><input type="checkbox" name="tangen" value="geochugokushikoku" id="geochugokushikoku" />中国四国地方</label
+                >
+                <label for="geokinki"><input type="checkbox" name="tangen" value="geokinki" id="geokinki" />近畿地方</label>
+                <label for="geochubu"><input type="checkbox" name="tangen" value="geochubu" id="geochubu" />中部地方</label>
+                <label for="geokanto"><input type="checkbox" name="tangen" value="geokanto" id="geokanto" />関東地方</label>
+                <label for="geotohoku"><input type="checkbox" name="tangen" value="geotohoku" id="geotohoku" />東北地方</label>
+                <label for="geohokkaido"><input type="checkbox" name="tangen" value="geohokkaido" id="geohokkaido" />北海道地方</label>
+              </div>
             </div>
-            <div class="koumin">
-              <h3>公民</h3>
-              <label for="citijiji"><input type="checkbox" name="tangen" value="citijiji" id="citijiji" />時事問題　</label>
-              <label for="citigendai"><input type="checkbox" name="tangen" value="citigendai" id="citigendai" />現代社会　　</label>
-              <label for="citikenpo"><input type="checkbox" name="tangen" value="citikenpo" id="citikenpo" />憲法　　　　</label><br />
-              <label for="citiseiji"><input type="checkbox" name="tangen" value="citiseiji" id="citiseiji" />政治　　　　</label>
-              <label for="citikeizai"><input type="checkbox" name="tangen" value="citikeizai" id="citikeizai" />経済　　　　</label>
-              <label for="citiglobal"><input type="checkbox" name="tangen" value="citiglobal" id="citiglobal" />国際　　　　</label><br />
+            <div class="tangen">
+              <div class="tang">公民</div>
+              <div class="tan">
+                <label for="citijiji"><input type="checkbox" name="tangen" value="citijiji" id="citijiji" />時事問題</label>
+                <label for="citigendai"><input type="checkbox" name="tangen" value="citigendai" id="citigendai" />現代社会</label>
+                <label for="citikenpo"><input type="checkbox" name="tangen" value="citikenpo" id="citikenpo" />憲法</label>
+                <label for="citiseiji"><input type="checkbox" name="tangen" value="citiseiji" id="citiseiji" />政治</label>
+                <label for="citikeizai"><input type="checkbox" name="tangen" value="citikeizai" id="citikeizai" />経済</label>
+                <label for="citiglobal"><input type="checkbox" name="tangen" value="citiglobal" id="citiglobal" />国際</label>
+              </div>
             </div>
           </div>
         </div>

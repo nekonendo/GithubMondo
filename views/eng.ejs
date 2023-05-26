@@ -10,7 +10,7 @@
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
-    <script src="/javascripts/script2.js"></script>
+    <script src="/javascripts/english.js"></script>
   </head>
 
   <!--ボディ-->
@@ -25,32 +25,33 @@
             <h2>問題数</h2>
             <div class="count">
               <label for="5"><input type="radio" name="quecount" value="5" id="5" />5問</label>
-              <label for="10"> <input type="radio" name="quecount" value="10" id="10" />10問</label>
-              <label for="15"
-                ><input type="radio" name="quecount" value="15" id="15" checked />15問</label
-              >
+              <label for="10"><input type="radio" name="quecount" value="10" id="10" />10問</label>
+              <label for="15"><input type="radio" name="quecount" value="15" id="15" checked />15問</label>
             </div>
           </div>
-          <div class="tangen">
+          <div class="tangens">
             <h2>出題範囲を選択してください</h2>
             <div class="word">
-              <h3>単語テスト</h3>
-              <p>区分</p>
-              <select name="category" id="category">
-                <option value="">選択してください</option>
-                <option value="newhorizon1"<% if (category === 'newhorizon1') { %>selected<% } %>>NewHorizon１年</option>
-                <option value="newhorizon2"<% if (category === 'newhorizon2') { %>selected<% } %>>NewHorizon２年</option>
-                <option value="newhorizon3"<% if (category === 'newhorizon3') { %>selected<% } %>>NewHorizon３年</option>
-                <option value="newcrown1"<% if (category=== 'newcrown1') { %>selected<% } %>>NewCrown１年</option>
-                <option value="newcrown2"<% if (category === 'newcrown2') { %>selected<% } %>>NewCrown２年</option>
-                <option value="newcrown3"<% if (category === 'newcrown3') { %>selected<% } %>>NewCrown３年</option>
-              </select>
-              <h6><%= categoryerror %></h6>
-              <p>単元</p>
-              <select name="tangen" id="tangen">
-                <option value="">選択してください</option>
-              </select>
-              <h6><%= tangenerror %></h6>
+              <div class="pulldown">
+                <p>区分</p>
+                <select name="category" id="category">
+                  <option value="">選択してください</option>
+                  <option value="newhorizon1"<% if (category === 'newhorizon1') { %>selected<% } %>>NewHorizon１年</option>
+                  <option value="newhorizon2"<% if (category === 'newhorizon2') { %>selected<% } %>>NewHorizon２年</option>
+                  <option value="newhorizon3"<% if (category === 'newhorizon3') { %>selected<% } %>>NewHorizon３年</option>
+                  <option value="newcrown1"<% if (category=== 'newcrown1') { %>selected<% } %>>NewCrown１年</option>
+                  <option value="newcrown2"<% if (category === 'newcrown2') { %>selected<% } %>>NewCrown２年</option>
+                  <option value="newcrown3"<% if (category === 'newcrown3') { %>selected<% } %>>NewCrown３年</option>
+                </select>
+                <div class="error-message"><%= categoryerror %></div>
+              </div>
+              <div class="pulldown">
+                <p>単元</p>
+                <select name="tangen" id="tangen">
+                  <option value="">選択してください</option>
+                </select>
+                <div class="error-message"><%= tangenerror %></div>
+              </div>
             </div>
           </div>
           <div class="printcount">

@@ -5,6 +5,7 @@
 }
 
 body {
+  margin: 0;
   font-family: "KleeOne-Regular", sans-serif;
   background-color: #999999;
   font-size: 16pt;
@@ -115,10 +116,10 @@ header {
 .header-logo {
   margin: 2mm 4mm;
   padding: 0px;
-  padding-right: 1mm;
+  padding-right: 2mm;
   font-weight: bold;
   font-family: "OCRB";
-  font-size: 32px;
+  font-size: 30px;
   height: 50mm;
   width: 12mm;
   color: rgb(49, 49, 49);
@@ -146,7 +147,7 @@ header {
 
 .header-right > p {
   margin-top: 4mm;
-  margin-right: 9mm;
+  margin-right: 8mm;
   display: block;
   float: left;
 }

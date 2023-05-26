@@ -2,17 +2,15 @@
   <div class="container">
     <div class="header-left">
       <a href="/" class="header-logo">ＭＯＮ-ＤＯ</a>
-      <div class="header-menu">
-        <a href="/jpn">国語</a>
-        <a href="/math">数学</a>
-        <a href="/eng">英語</a>
-        <a href="/sci">理科</a>
-        <a href="/sost">社会</a>
-        <a href="/zatu">雑学</a>
-      </div>
-      <!--<p>ようこそ、<%= locals.username  %> さん</p>-->
     </div>
-    <span class="fa menu-icon"></span>
+    <div class="header-menu">
+      <a href="/jpn">国語</a>
+      <a href="/math">数学</a>
+      <a href="/eng">英語</a>
+      <a href="/sci">理科</a>
+      <a href="/sost">社会</a>
+      <a href="/zatu">雑学</a>
+    </div>
     <div class="header-right">
       <% if(locals.isLoggedIn) { %>
       <a href="/mypage">マイページ</a>
@@ -23,6 +21,33 @@
       <% }else{ %>
       <a href="/login" class="login">ログイン</a>
       <% } %>
+    </div>
+    <div id="menu-wrapper">
+      <div id="menu-icon" onclick="toggleMenu()"><span></span></div>
+      <div id="menu-items" style="display: none">
+        <ul>
+          <li><a href="/jpn">国語</a></li>
+          <li><a href="/math">数学</a></li>
+          <li><a href="/eng">英語</a></li>
+          <li><a href="/sci">理科</a></li>
+          <li><a href="/sost">社会</a></li>
+          <li><a href="/zatu">雑学</a></li>
+          <li>
+            <% if(locals.isLoggedIn) { %>
+            <a href="/mypage">マイページ</a>
+            <% }else{ %>
+            <a href="/signup">ユーザー登録</a>
+            <% } %> <% if(locals.isLoggedIn) { %>
+          </li>
+          <li>
+            <a href="/logout">ログアウト</a>
+            <% }else{ %>
+            <a href="/login" class="login">ログイン</a>
+            <% } %>
+          </li>
+          <!-- 他のメニュー項目を追加 -->
+        </ul>
+      </div>
     </div>
   </div>
 </header>

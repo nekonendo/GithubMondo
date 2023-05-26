@@ -7,6 +7,7 @@
     <title>Mon-Do</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
+    <script src="/javascripts/header.js"></script>
   </head>
 
   <!--ボディ-->
@@ -16,31 +17,32 @@
     <%- include('header'); %>
 
     <!--本文-->
-    <div class="edit">
+    <div class="sign">
       <div class="container">
-        <div class="ctl">
+        <div class="signpanel">
           <h2>問答を編集する</h2>
-
           <form action="/mypage/update" method="post">
             <input type="hidden" name="tableName" Value="<%= tableName %>" />
             <input type="hidden" name="category" value="<%= category %>" />
             <input type="hidden" name="tangen" value="<%= tangen %>" />
             <input type="hidden" name="id" value="<%= lists[0].id %>" />
-            <%if (tableName==="japanese"){%>
-            <p>科目:　　国語</p>
-            <%}else if(tableName==="english"){%>
-            <p>科目:　　英語</p>
-            <%}else if(tableName==="math"){%>
-            <p>科目:　　数学</p>
-            <%}else if(tableName==="science"){%>
-            <p>科目:　　理科</p>
-            <%}else if(tableName==="sostudy"){%>
-            <p>科目:　　社会</p>
-            <%}else if(tableName==="zatugaku"){%>
-            <p>科目:　　雑学 %></p>
-            <%}%>
-            <p>区分:　　<%= lists[0].categoryLabel %></p>
-            <p>単元:　　<%= lists[0].tangenLabel %></p>
+            <div class="tangen-label">
+              <%if (tableName==="japanese"){%>
+              <p>科目:　　国語</p>
+              <%}else if(tableName==="english"){%>
+              <p>科目:　　英語</p>
+              <%}else if(tableName==="math"){%>
+              <p>科目:　　数学</p>
+              <%}else if(tableName==="science"){%>
+              <p>科目:　　理科</p>
+              <%}else if(tableName==="sostudy"){%>
+              <p>科目:　　社会</p>
+              <%}else if(tableName==="zatugaku"){%>
+              <p>科目:　　雑学 %></p>
+              <%}%>
+              <p>区分:　　<%= lists[0].categoryLabel %></p>
+              <p>単元:　　<%= lists[0].tangenLabel %></p>
+            </div>
             <p>問題</p>
             <input name="listQuestion" type="text" value="<%= lists[0].question %>" />
             <div class="error-message"><%= questionerror %></div>

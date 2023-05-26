@@ -5,65 +5,61 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon-Do プリントサービス</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="/stylesheets/stylesheet4.css" />
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/jpnPrint.css" />
   </head>
   <body>
+    <% for (let j = 0; j < pageCount; j++) { %>
     <div class="page">
-      <% for (let j= 0; j<pageCount;j++){ %>
       <%- include('jpnPrintHeader'); %>
       <div class="area">
         <div class="odai">◎次の問いに答えなさい</div>
-        
-          <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
-            <% if ( i=== queryResults.length){ %>
-              <% break;}else{ %>
-                <% if (quecount<15){ %>
-                  <div class="blank">ブランク</div>
-                  <% if (quecount<10){ %>
-                    <div class="blank">ブランク</div>
-                  <% }} %>
-                  <div class="jpn-mondo">
-                    <li>
-                      <div class="question"><p>(<%= no %>)</p><%- queryResults[i].question; %></div>
-                      <div class="ansbox"></div>
-                    </li>
-                  </div>
-              <% }}; %>
+        <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %> <% if ( i=== queryResults.length){ %> <% break;}else{ %> <% if
+        (quecount<15){ %>
+        <div class="blank">ブランク</div>
+        <% if (quecount<10){ %>
+        <div class="blank">ブランク</div>
+        <% }} %>
+        <div class="jpn-mondo">
+          <li>
+            <div class="question">
+              <p>(<%- no %>)</p>
+              <%- queryResults[i].question; %>
+            </div>
+            <div class="ansbox"></div>
+          </li>
+        </div>
+        <% }} %>
       </div>
       <%- include('printFooter'); %>
-      <div class="page-break"></div>
     </div>
     <!--ページ区切り-->
+    <div class="page-break"></div>
     <div class="page">
       <%- include('jpnPrintHeader'); %>
       <div class="area2">
         <div class="odai">●解答</div>
-          <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
-            <% if ( i=== queryResults.length){ %>
-              <% break;}else{ %>
-                <% if (quecount<15){ %>
-                  <div class="blank">ブランク</div>
-                  <% if (quecount<10){ %>
-                    <div class="blank">ブランク</div>
-                  <% }} %>
-                  <div class="jpn-mondo">
-                <li>
-                  <div class="question"><p>(<%= no %>)</p> <%- queryResults[i].answer; %></div>
-                  <% if ( tableName === "english"){%>
-                  <div class="ansbox"></div>
-                  <% } %>
-                </li>
-              </div>
-            <% }}; %>
+        <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++){ %> <% let no =i+1; %> <% if ( i=== queryResults.length){ %> <% break; %> <% }else{
+        %> <% if (quecount<15){ %>
+        <div class="blank">ブランク</div>
+        <% if (quecount<10){ %>
+        <div class="blank">ブランク</div>
+        <% }} %>
+        <div class="jpn-mondo">
+          <li>
+            <div class="question">
+              <p>(<%- no %>)</p>
+              <%- queryResults[i].answer; %>
+            </div>
+            <% if ( tableName === "english"){%>
+            <div class="ansbox"></div>
+            <% } %>
+          </li>
+        </div>
+        <% }}; %>
       </div>
       <div class="advarea"></div>
       <%- include('printFooter'); %>
-      <div class="page-break"></div>
     </div>
     <% } %>
   </body>

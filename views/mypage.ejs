@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
     <script src="/javascripts/script1.js"></script>
+    <script src="/javascripts/header.js" ></script>
+    <script>
+      MathJax = {
+        chtml: {
+          matchFontHeight: false
+        },
+        tex: {
+          inlineMath: [['$', '$'],["\\(", "\\)"]],
+        }
+      };
+      </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
 
   <!--ボディ-->
@@ -15,7 +28,7 @@
     <!--ヘッダー呼び出し-->
     <%- include('header'); %>
     <!--本文-->
-    <div class="container">
+    <div class="container" id="content">
       <!--表示選択ゾーン-->
       <div class="container-header">
         <h1>マイページ</h1>

@@ -114,11 +114,11 @@ window.onload = function () {
       <option value="m2300">〇〇÷２けた</option>
       <option value="m2400">あまりあり</option>
       <option value="m2500">むずかしめ</option>
-      <option value="m2600">四則計算</option>
         `;
     } else if (category.value == "seisu-muzu") {
       tangen.innerHTML = `
       <option value="1">選択してください</option>
+      <option value="m2600">四則計算</option>
       <option value="m2700">かっこのある計算</option>
       <option value="m2800">累乗</option>
         `;
@@ -153,6 +153,7 @@ window.onload = function () {
       <option value="m5000">加減</option>
       <option value="m5200">乗除</option>
       <option value="m5400">四則計算</option>
+      <option value="m5500">分数・小数</option>
          `;
     } else if (category.value == "moji") {
       tangen.innerHTML = `

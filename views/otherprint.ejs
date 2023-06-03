@@ -9,7 +9,19 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/stylesheets/mathPrint.css" />
+    <link rel="stylesheet" href="/stylesheets/otherPrint.css" />
+    <script>
+      MathJax = {
+        chtml: {
+          matchFontHeight: false
+        },
+        tex: {
+          inlineMath: [['$', '$'],["\\(", "\\)"]],
+        }
+      };
+      </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body>
     <% for (let j= 0; j<pageCount;j++){ %>
@@ -17,11 +29,11 @@
       <%- include('printHeader'); %>
       <div class="area">
         <div class="odai">◎次の問いに答えなさい</div>
-        <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
+         <% for (let i = 0 + j*quecount; i < quecount*(j+1); i++) {%> <% let no =i+1; %>
         <% if ( i=== queryResults.length){ %>
         <% break;}else{ %>
         <li>
-          <div class="question">(<%= no %>) <%= queryResults[i].question; %></div>
+          <div class="question">\((<%= no %>)\quad \)<%= queryResults[i].question; %></div>
           <div class="ansbox"></div>
         </li>
         <% }}; %>
@@ -41,7 +53,7 @@
         <% if ( i=== queryResults.length){ %>
         <% break;}else{ %>
           <li>
-            <div class="question">(<%= no %>) <%= queryResults[i].answer; %></div>
+            <div class="question">\((<%= no %>)\quad \)<%= queryResults[i].answer; %></div>
             <% if ( tableName === "english"){%>
             <div class="ansbox"></div>
             <% } %>

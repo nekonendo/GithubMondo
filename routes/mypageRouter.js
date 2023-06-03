@@ -303,7 +303,7 @@ router.post(
     const answererror = [];
     const checkerror = [];
     connection.query(
-      `INSERT INTO ${tableName}(tangen,question,answer,editor,date) VALUES(?,?,?,?,now())`,
+      `INSERT INTO ${tableName}(tangen,question,answer,editor,date,count) VALUES(?,?,?,?,now(),0)`,
       [req.body.tangen, req.body.question, req.body.answer, req.session.username],
       (error, results) => {
         if (error) {
@@ -445,7 +445,7 @@ router.post(
       [req.body.listQuestion, req.body.listAnswer, req.body.id],
       (error, results) => {
         connection.query(
-          `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
+          `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.tangen = '${tangen}' and ${tableName}.editor = ?`,
           [req.session.username],
           (error, results) => {
             if (error) {

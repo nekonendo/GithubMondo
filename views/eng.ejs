@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="/stylesheets/stylesheet1.css" />
     <script src="/javascripts/english.js"></script>
+    <script src="/javascripts/header.js"></script>
   </head>
 
   <!--ボディ-->
@@ -18,7 +19,7 @@
     <!--ヘッダー呼び出し-->
     <%- include('header'); %>
     <!--本文-->
-    <div class="choice">
+    <div class="choice" id="content">
       <form action="/print/other" method="post">
         <div class="ctl">
           <div class="quecount">

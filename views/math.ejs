@@ -15,8 +15,8 @@
     <!--ヘッダー呼び出し-->
     <%- include('header'); %>
     <!--本文-->
-    <div class="choice">
-      <form action="/print/math" method="post">
+    <div class="choice" id="content">
+      <form action="/print/other" method="post">
         <div class="ctl">
           <div class="quecount">
             <h2>問題数</h2>
@@ -106,6 +106,7 @@
                 <label for="m5000"><input type="checkbox" name="tangen" value="m5000" id="m5000" />加減</label>
                 <label for="m5200"><input type="checkbox" name="tangen" value="m5200" id="m5200" />乗除</label>
                 <label for="m5400"><input type="checkbox" name="tangen" value="m5400" id="m5400" />四則計算</label>
+                <label for="m5500"><input type="checkbox" name="tangen" value="m5500" id="m5500" />分数・小数</label>
               </div>
             </div>
             <div class="tangen">
@@ -166,6 +167,7 @@
           </div>
         </div>
         <div class="print">
+          <input type="hidden" name="printrange" value="printshufful" checked />
           <input type="hidden" name="tableName" value="math" />
           <input type="submit" class="btn" value="印刷" />
         </div>

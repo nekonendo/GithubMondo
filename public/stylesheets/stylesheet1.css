@@ -156,6 +156,7 @@ input[type="checkbox"] {
   position: relative;
   top: 2px;
 }
+
 .btn-circle {
   /*マイページ*/
   display: none;
@@ -277,7 +278,7 @@ textarea {
   font-size: 16px;
   color: #2b546a;
 }
-input:hover,
+input:hover :not(.return),
 textarea:hover {
   /*新規作成、編集、科目ページ、マイページ、ログイン、サインアップ*/
   border-color: #b6c4d2;
@@ -299,6 +300,7 @@ textarea {
   background-color: #fff8dc;
   height: auto;
 }
+
 .selects {
   /*マイページ*/
   display: flex;
@@ -404,7 +406,7 @@ textarea {
   /*サインアップ、ログイン、新規作成*/
   margin-bottom: 10px;
 }
-.sign input {
+.sign input :not(.return) {
   /*サインアップ、ログイン、新規作成*/
   padding: 10px 20px;
 }
@@ -413,7 +415,7 @@ textarea {
   box-shadow: 0 0 0px 1000px #fff inset;
 }
 
-.sign input[type="submit"] {
+.sign input[type="submit"] :not(.return) {
   /*サインアップ、ログイン*/
   font-size: 23px;
   font-weight: bold;
@@ -424,6 +426,24 @@ textarea {
   display: block;
   margin: 80px auto 0;
 }
+.return {
+  /*新規作成ページの戻るボタン*/
+  border: none;
+  width: 50%;
+  height: 30px;
+  padding-top: 0;
+  font-size: 18px;
+  display: block;
+  color: #575c61;
+  margin: 0 auto;
+  background-color: #fff8dc;
+}
+.return:hover {
+  /*新規作成ページの戻るボタン*/
+  cursor: pointer;
+  color: red;
+}
+
 .signpanel {
   /*サインアップ、ログイン*/
   padding: 20px 40px;

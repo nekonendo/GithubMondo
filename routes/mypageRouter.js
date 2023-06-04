@@ -504,7 +504,7 @@ router.post(
     const tableName = req.body.tableName;
     const category = req.body.category;
     const tangen = req.body.tangen;
-    const myselect = req.body.subject;
+    const myselect = req.body.tableName;
     const addmyselect = req.body.addsubject;
     const mymondo = "on";
     const subjecterror = [];
@@ -517,7 +517,7 @@ router.post(
     const errors = [];
     connection.query(`DELETE FROM ${tableName}  WHERE id = ?`, [req.params.id], (error, results) => {
       connection.query(
-        `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.editor = ?`,
+        `SELECT * FROM ${tableName}  JOIN ${tableName}sub ON ${tableName}.tangen = ${tableName}sub.tangen WHERE ${tableName}.tangen = '${tangen}' and ${tableName}.editor = ?`,
         [req.session.username],
         (error, results) => {
           //一覧表をリロードし新規作成した単元を表示
@@ -534,6 +534,7 @@ router.post(
               list.date = date3;
             }
           });
+          console.log(results);
           res.render("mypage.ejs", {
             lists: results,
             tableName: tableName,

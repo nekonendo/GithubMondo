@@ -158,7 +158,8 @@ window.onload = function () {
     } else if (category.value == "moji") {
       tangen.innerHTML = `
       <option value="1">選択してください</option>
-      <option value="m5600">計算</option>
+      <option value="m5600">加減</option>
+      <option value="m5650">乗除</option>
       <option value="m5700">分配法則</option>
       <option value="m5800">分数の計算</option>
         `;

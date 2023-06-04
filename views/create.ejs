@@ -59,8 +59,16 @@
               <input type="text" name="answer" />
               <div class="error-message"><%= answererror %></div>
               <input type="submit" class="btn" value="作成する" />
+
             </div>
-            <a href="/mypage">マイページへ戻る</a>
+            <!--<a href="/mypage">マイページへ戻る</a>-->
+          </form>
+          <form action="/mypage/reload" method="post">
+              <input type="hidden" name="subject" value="<%= tableName %>" />
+              <input type="hidden" name="category" value="<%= category %>" />
+              <input type="hidden" name="tangen" value="<%= tangen %>" />
+              <input type="hidden" name="mymondo" value="on" />
+              <input type="submit" value="マイページへ戻る" class="return" formaction="/mypage/reload" />
           </form>
         </div>
       </div>

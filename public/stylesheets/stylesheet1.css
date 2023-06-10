@@ -1010,12 +1010,23 @@ ruby[data-ruby]::before {
   /*国語プリント*/
   content: attr(data-ruby);
   position: absolute;
-  left: -2em;
-  top: 0.3em;
-  right: -1.5em;
+  left: 0;
+  top: -13px;
   text-align: center;
-  font-size: 0.5em;
-  color: black;
+  font-size: 0.5px;
+  color: white;
+  height: 20px;
+}
+
+.mon {
+  font-size: 14px;
+}
+.do {
+  border: solid 1px #454545;
+  font-size: 12px;
+
+  padding-left: 4px;
+  color: white;
 }
 
 /*・・・・・タブレットなどの中型ディスプレイのときのみ有効なスタイル・・・・・*/

@@ -78,6 +78,31 @@ li {
 }
 
 /*・・・・・・・・・ルビ・・・・・・・・・*/
+.jpn-mondo .mon {
+  font-size: 20px;
+  letter-spacing: 0.6em;
+  text-align: center;
+  padding-right: 2px;
+}
+.jpn-mondo .do {
+  font-size: 20px;
+  border: solid 1px #454545;
+  margin: 3px 0;
+  padding: 4px 0;
+  padding-left: 4px;
+  color: white;
+}
+.jpn-mondo .yomi {
+  font-size: 22px;
+  border-right: 1px solid black;
+  font-weight: bold;
+  margin: 3px 0;
+  margin-left: 2px;
+  padding: 8px 0;
+  padding-left: 4px;
+  padding-right: 1px; /* 傍線の幅に合わせて余白を設定 */
+}
+
 ruby[data-ruby] {
   position: relative;
 }
@@ -85,23 +110,18 @@ ruby[data-ruby]::before {
   content: attr(data-ruby);
   position: absolute;
   left: -2em;
-  top: 0.3em;
-  right: -1.5em;
+  top: -3.5em;
+  right: -2em;
   text-align: center;
-  font-size: 0.5em;
+  font-size: 0.4em;
   color: black;
+  height: 80px;
+  letter-spacing: 0.1em;
 }
+
 .jpn-mondo {
   font-size: 20px;
   text-align: center;
-}
-.jpn-mondo .mon {
-  font-size: 20px;
-  border: solid 1px #454545;
-  margin: 3px 0;
-  padding: 4px 0;
-  padding-left: 4px;
-  color: white;
 }
 
 /*ヘッダー*/
